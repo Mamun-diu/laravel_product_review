@@ -15,3 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'frontend.index');
 Route::view('/admin', 'backend.index');
+Route::view('/login', 'frontend.login');
+Route::view('admin/login', 'backend.login');
+Route::view('admin/register', 'backend.register');

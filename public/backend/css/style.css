@@ -1,3 +1,7 @@
-body{
-
+.full-body{
+    padding : 50px;
+    min-height: 600px;
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,135,1) 50%, rgba(252,179,69,1) 100%);
+    position : relative;
 }

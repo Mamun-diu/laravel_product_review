@@ -1,3 +1,90 @@
-body{
-    background-color: red;
+
+.full-body{
+    padding : 50px;
+    min-height: 600px;
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,135,1) 50%, rgba(252,179,69,1) 100%);
+    position : relative;
 }
+.no-account{
+    cursor: pointer;
+    color: #000000ab;
+    border-bottom: 2px solid rgb(38 80 141);
+    font-weight: bold;
+}
+.have-account{
+    cursor: pointer;
+    color: #000000ab;
+    border-bottom: 2px solid rgb(38 80 141);
+    font-weight: bold;
+}
+.login-before{
+    position : absolute;
+    left : 40%;
+}
+.register-before{
+    position : absolute;
+    display: none;
+    right : 0%;
+}
+
+.login{
+    left : 0%;
+    opacity: 0;
+    animation-name: login;
+    animation-duration: 2s;
+}
+.register{
+    display: block;
+    right : 40%;
+    animation-name: register;
+    /* animation-delay: 2s; */
+    animation-duration: 2s;
+
+}
+
+@keyframes login {
+    0% {left: 40%;opacity:1;}
+    25% {opacity:0.7;}
+    50% {opacity:0.4;}
+    75% {opacity:0.1;}
+    100% {right: 0%; opcaity:0;}
+  }
+  @keyframes register {
+    0% {right: 0%; opacity:0;}
+    25% {opacity:0.3;}
+    50% {opacity:0.6;}
+    75% {opacity:0.9;}
+    100% {right: 40%; opacity:1}
+  }
+
+.aregister{
+    position : absolute;
+    opacity:0;
+    right : 0%;
+    animation-name: aregister;
+    animation-duration: 2s;
+}
+.alogin{
+    position : absolute;
+    right : 40%;
+    animation-name: alogin;
+    /* animation-delay: 2s; */
+    animation-duration: 2s;
+
+}
+
+@keyframes aregister {
+    0% {right: 40%; opacity: 1;}
+    25% {opacity:0.7}
+    50% {opacity:0.5}
+    75% {opacity:0.2}
+    100% {right: 0%; opacity:0;}
+  }
+  @keyframes alogin {
+    0% {left: 0%; opacity:0}
+    25% {opacity:0.2}
+    50% {opacity:0.5}
+    75% {opacity:0.7}
+    100% {left: 40%; opacity:1}
+  }
