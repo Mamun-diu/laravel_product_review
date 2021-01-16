@@ -1,0 +1,140 @@
+*{
+    margin:0;
+    padding:0;
+    text-decoration: none;
+    list-style: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: arial,sans-serif;
+}
+
+nav{
+    background : black;
+    width: 100%;
+    height: 80px;
+}
+.company{
+    color: #5f7576;
+    font-size: 30px;
+    margin: 0px 30px;
+    line-height: 80px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    /* text-shadow: 5px 5px 5px #03e9fa, 20px 0px 25px #03e9fa, 40px 0px 40px #03e9fa, 80px 75px 75px #03e9fa; */
+    text-shadow: 2px 0px 5px #000000, 0px 2px 5px #000000, -2px 0px 5px #000000, 0px -2px 5px #000000, 20px 0px 25px #17a9b4, 0px 0px 40px #03e9fa, 14px 10px 53px #03e9fa, 20px 0px 25px #17a9b4, 0px 0px 40px #03e9fa, 14px 10px 53px #03E9FA;
+    /* text-shadow:5px 5px 5px  #03e9fa,
+                20px 0px 25px  #03e9fa,
+                40px 0px 40px  #03e9fa,
+                80px 75px 75px  #03e9fa; */
+
+
+}
+nav > ul{
+    float : right;
+    margin-right: 30px;
+}
+nav ul  li{
+    display: inline-block;
+    padding: 0 10px;
+    line-height: 80px;
+}
+
+nav  ul li a{
+    color: #ffffffaa;
+    font-size: 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    margin: 0px 0px;
+    letter-spacing: 2px;
+    border-top: 1px solid #fff;
+    border-radius: 15px;
+}
+nav ul li a:hover, nav ul button:hover{
+    color: #03e9fe !important;
+    border-top: 2px solid #03e9fe !important;
+}
+nav ul.dropdown-menu li a:hover, nav ul.dropdown-menu button:hover{
+    color: #000000 !important;
+    border-top: 2px solid #000000 !important;
+}
+ul.dropdown-menu{
+    margin-top : 15px !important;
+    background : rgb(255, 255, 255);
+}
+nav ul ul li{
+    display:block;
+    line-height: 30px;
+}
+nav ul ul li a{
+    color : #000000 !important;
+    font-size: 15px;
+}
+nav ul button{
+    border: none !important;
+    border-top : 1px solid #fff !important;
+    padding : 10px !important;
+    border-radius: 15px !important;
+    font-size : 18px !important;
+}
+nav ul button:hover{
+    background:none !important;
+}
+.btn-check:active+.btn-outline-secondary, .btn-check:checked+.btn-outline-secondary, .btn-outline-secondary.active, .btn-outline-secondary.dropdown-toggle.show, .btn-outline-secondary:active {
+    color: #ffffffaa;
+    background: none !important;
+    border-color: #6c757d;
+}
+.btn-check:focus+.btn, .btn:focus{
+    outline: none !important;
+    outline-color: transparent !important;
+}
+.btn-check:focus+.btn, .btn:focus, .btn-check:focus+.btn-outline-secondary, .btn-outline-secondary:focus {
+    box-shadow: none !important;
+}
+nav ul button .fas{
+    font-size : 18px;
+
+}
+
+.dropdown-item:hover{
+    background:none;
+    padding: 10px 25px;
+}
+
+nav form{
+    width : 500px;
+    margin-left : 150px;
+    margin-top : -50px;
+}
+nav a{
+    text-decoration: none;
+    padding: 5px 10px 5px 5px;
+}
+nav a:hover{
+    color:#fff;
+    border-top : 1px solid #fff;
+    border-radius: 15px;
+}
+#search{
+    background:#ffffffaa;
+    border-right:none !important;
+}
+#search::placeholder{
+    color : #000000aa;
+}
+#go{
+    background : #ffffffaa;
+    border-left:none !important;
+    font-weight: bold !important;
+}
+#go:hover{
+    background: #000000;
+    color: #ffffffaa;
+    font-weight: bold;
+}
+

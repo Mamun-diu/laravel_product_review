@@ -2,8 +2,9 @@
 .full-body{
     padding : 50px;
     min-height: 600px;
-    background: rgb(131,58,180);
-    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,135,1) 50%, rgba(252,179,69,1) 100%);
+    /* background: rgb(131,58,180); */
+    /* background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,135,1) 50%, rgba(252,179,69,1) 100%); */
+    background: linear-gradient(to right, #000000, #434343);
     position : relative;
 }
 .no-account{
@@ -11,12 +12,20 @@
     color: #000000ab;
     border-bottom: 2px solid rgb(38 80 141);
     font-weight: bold;
+    border-radius: 15px;
+    padding: 5px 10px;
+    text-align: center;
+    display: block;
 }
 .have-account{
     cursor: pointer;
     color: #000000ab;
     border-bottom: 2px solid rgb(38 80 141);
     font-weight: bold;
+    border-radius: 15px;
+    padding: 5px 10px;
+    text-align: center;
+    display: block;
 }
 .login-before{
     position : absolute;
@@ -88,3 +97,14 @@
     75% {opacity:0.7}
     100% {left: 40%; opacity:1}
   }
+
+#register input,#register textarea{
+    border : none !important;
+    border-bottom: 2px solid #03e9fa !important;
+}
+#register input:focus,#register textarea:focus{
+    /* border: none !important; */
+    /* outline: none !important; */
+    border-bottom : 2px solid #000000 !important;
+    box-shadow:none !important;
+}

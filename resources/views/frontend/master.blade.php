@@ -10,7 +10,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="icon" type="image/png" href="{{ asset('/public/icon/logo.png') }}">
+    <link rel="stylesheet" href="{{ asset('/public/frontend/css/nav.css') }}">
     <link rel="stylesheet" href="{{ asset('/public/frontend/css/style.css') }}">
+
     <title>Product Review</title>
   </head>
   <body>
