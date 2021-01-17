@@ -15,9 +15,15 @@
   </head>
   <body>
     {{ view('backend/header') }}
-    <div style="background: #F0F1F2; min-height: 500px">
-        @yield('content')
+    <div style="background: #F0F1F2; min-height: 500px" class="row g-0">
+        <div class="col-2">
+            {{ view('backend/sidebar') }}
+        </div>
+        <div class="col-10">
+            @yield('content')
+        </div>
     </div>
+
     {{ view('backend/footer') }}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>

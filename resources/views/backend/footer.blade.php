@@ -1,1 +1,5 @@
-<h1 class="display-2 text-center">Backend Footer</h1>
+<footer>
+    <p class="lead">Copyright &copy 2020 Programmer Life, All rights reserved.
+
+    </p>
+</footer>
