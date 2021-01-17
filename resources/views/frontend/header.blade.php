@@ -2,9 +2,10 @@
 <nav>
     <a href="{{ URL::to('/') }}" class="company" for="">Review</a>
     <form class="d-inline-block" id="searchForm" action="" >
-        <div style="height:50px;" class="input-group ">
-            <input id="search"  class="form-control" type="text" placeholder="What are you looking for?" autocomplete="off" name="search" value="">
-            <button id="go" type="submit" class="input-group-text">Go</button>
+        <div id="main_search" class="input-group ">
+            <input id="search"  class="form-control" type="text" placeholder="What are you looking for?" autocomplete="off" name="search" value="" >
+            {{-- <button id="go" type="submit" class="input-group-text">Go</button> --}}
+            <i class="fas fa-search"></i>
 
         </div>
     </form>
