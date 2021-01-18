@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'frontend.index');
-Route::view('/admin', 'backend.index');
-Route::view('/login', 'frontend.login');
-Route::view('admin/login', 'backend.login');
-Route::view('admin/register', 'backend.register');
+
+
+// Route::get('admin/login', [AdminController::class, 'index']);
+Route::post('/login', [AdminController::class, 'login']);
+
+Route::post('/user/login', [UserController::class, 'checkLogin']);
+Route::post('/user/registration', [UserController::class, 'registration']);
+
+Route::get('/favourite', [UserController::class, 'favourite']);
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::view('/admin', 'backend.index');
+    Route::get('/admin/login', [AdminController::class, 'index']);
+
+    Route::get('/logout', [AdminController::class, 'logout']);
+});
+Route::group(['middleware' => ['user']], function () {
+    Route::get('/login', [UserController::class, 'login']);
+    Route::get('/logout', [UserController::class, 'logout']);
+    Route::get('/rated', [UserController::class, 'rated']);
+});

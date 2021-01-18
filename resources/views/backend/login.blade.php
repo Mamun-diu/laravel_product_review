@@ -17,9 +17,23 @@
         <div class="container ">
             <div id="login" class=" d-flex justify-content-center align-items-center">
                 <div class="card" style="width: 18rem;">
+
                     <div class="card-body">
                         <h5 class="card-title text-center border-bottom p-2">Admin Login</h5>
-                        <form action="">
+                        @if(session('msg'))
+                            <div class="alert alert-danger">{{ session('msg') }}</div>
+                        @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form action="{{ URL::to('login') }}" method="POST">
+                            @csrf
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input id="email" type="email" class="form-control mt-1" name="email" placeholder="Enter Email Address...">
