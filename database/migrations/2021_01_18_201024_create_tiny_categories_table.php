@@ -15,6 +15,8 @@ class CreateTinyCategoriesTable extends Migration
     {
         Schema::create('tiny_categories', function (Blueprint $table) {
             $table->id();
+            $table->integer('sub_category_id');
+            $table->string('tiny_category');
             $table->timestamps();
         });
     }
