@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Main_category;
+use App\Models\Sub_category;
+use App\Models\Tiny_category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $main_cat = Main_category::all();
+        return view('backend.product')->with('main',$main_cat);
     }
 
     /**

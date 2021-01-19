@@ -87,4 +87,8 @@ class TinyCategoryController extends Controller
     {
         //
     }
+    public function findTiny($id){
+        $find = Tiny_category::where('sub_category_id',$id)->get();
+        return response()->json($find);
+    }
 }
