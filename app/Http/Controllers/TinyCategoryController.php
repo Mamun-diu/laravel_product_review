@@ -35,7 +35,12 @@ class TinyCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cat = new Tiny_category;
+        $cat->sub_category_id = $request->sub_category_id;
+        $cat->tiny_category = $request->tiny_category;
+        $cat->save();
+        return Redirect()->back();
+
     }
 
     /**

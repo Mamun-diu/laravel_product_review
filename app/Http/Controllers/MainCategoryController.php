@@ -14,7 +14,7 @@ class MainCategoryController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -24,7 +24,8 @@ class MainCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $main = Main_category::all();
+        return view('backend.categories')->with('main',$main);
     }
 
     /**
@@ -35,7 +36,10 @@ class MainCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $main = new Main_category;
+        $main->main_category = $request->main_category;
+        $main->save();
+        return Redirect()->back();
     }
 
     /**
@@ -82,4 +86,5 @@ class MainCategoryController extends Controller
     {
         //
     }
+
 }

@@ -10,8 +10,8 @@
         </div>
     </form>
     <ul>
-        <li id="fav" ><a  href="{{ URL::to('/favourite') }}" ><i data-bs-toggle="tooltip" title="Favourite" class="fas fa-heart" ></i></a></li>
-        <li><a href="{{ URL::to('/rated') }}"><i data-bs-toggle="tooltip" title="Rated" class="fas fa-star"></i></a></li>
+        <li id="fav" ><a  href="{{ URL::to('user/favourite') }}" ><i data-bs-toggle="tooltip" title="Favourite" class="fas fa-heart" ></i></a></li>
+        <li><a href="{{ URL::to('user/rated') }}"><i data-bs-toggle="tooltip" title="Rated" class="fas fa-star"></i></a></li>
         {{-- <li><a href="#">Home</a></li> --}}
         @if(Session::has('user'))
             <li><a href="#">{{ Session::get('user.name', 'default') }}</a></li>

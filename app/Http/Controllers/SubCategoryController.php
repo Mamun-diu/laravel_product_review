@@ -35,7 +35,11 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sub = new Sub_category;
+        $sub->main_category_id = $request->main_category_id;
+        $sub->sub_category = $request->sub_category;
+        $sub->save();
+        return Redirect()->back();
     }
 
     /**
@@ -81,5 +85,11 @@ class SubCategoryController extends Controller
     public function destroy(Sub_category $sub_category)
     {
         //
+    }
+    public function findSub($id){
+
+        $find = Sub_category::where('main_category_id',$id)->get();
+        return response()->json($find);
+
     }
 }

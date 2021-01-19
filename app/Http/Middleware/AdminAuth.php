@@ -16,10 +16,11 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->path()=='admin/login' && $request->session()->has('admin')){
+        $path = substr($request->path(), 0, 5);
+        if($request->path()=='super/login' && $request->session()->has('admin')){
             return redirect('/admin');
-        }elseif($request->path()=='admin' && !$request->session()->has('admin')){
-            return redirect('/admin/login');
+        }elseif($path=='admin' && !$request->session()->has('admin')){
+            return redirect('/super/login');
         }
         return $next($request);
     }

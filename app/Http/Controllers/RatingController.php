@@ -14,7 +14,7 @@ class RatingController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.rated');
     }
 
     /**

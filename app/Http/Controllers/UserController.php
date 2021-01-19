@@ -127,19 +127,5 @@ class UserController extends Controller
     {
         //
     }
-
-    public function favourite(){
-        if(Session::has('user')){
-            return view('frontend.favourite');
-        }else{
-            return redirect('/login');
-        }
-    }
-    public function rated(){
-        if(Session::has('user')){
-            return view('frontend.rated');
-        }else{
-            return redirect('/login');
-        }
-    }
+    
 }

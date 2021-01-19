@@ -3,6 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FavouriteController;
+use App\Http\Controllers\MainCategoryController;
+use App\Http\Controllers\PriceController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\TinyCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,23 +24,27 @@ use App\Http\Controllers\UserController;
 
 Route::view('/', 'frontend.index');
 
-
-// Route::get('admin/login', [AdminController::class, 'index']);
 Route::post('/login', [AdminController::class, 'login']);
-
 Route::post('/user/login', [UserController::class, 'checkLogin']);
 Route::post('/user/registration', [UserController::class, 'registration']);
 
-Route::get('/favourite', [UserController::class, 'favourite']);
+
 
 Route::group(['middleware' => ['admin']], function () {
     Route::view('/admin', 'backend.index');
-    Route::get('/admin/login', [AdminController::class, 'index']);
+    Route::get('/super/login', [AdminController::class, 'index']);
 
-    Route::get('/logout', [AdminController::class, 'logout']);
+    Route::get('admin/logout', [AdminController::class, 'logout']);
+    Route::get('admin/add/category', [MainCategoryController::class, 'create']);
+    Route::post('/admin/main/category', [MainCategoryController::class, 'store']);
+    Route::post('admin/sub/category', [SubCategoryController::class, 'store']);
+    Route::post('admin/tiny/category', [TinyCategoryController::class, 'store']);
+    Route::get('/admin/find/sub/{id}', [SubCategoryController::class, 'findSub']);
+
 });
 Route::group(['middleware' => ['user']], function () {
     Route::get('/login', [UserController::class, 'login']);
     Route::get('/logout', [UserController::class, 'logout']);
-    Route::get('/rated', [UserController::class, 'rated']);
+    Route::get('user/rated', [RatingController::class, 'index']);
+    Route::get('user/favourite', [FavouriteController::class, 'index']);
 });
