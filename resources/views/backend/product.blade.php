@@ -1,6 +1,6 @@
 @extends('backend/master')
 @section('content')
-<form id="form" action="" enctype="multipart/form-data">
+<form id="form" action="{{ URL::to('admin/product/store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row g-0 m-3 bg-light rounded">
 

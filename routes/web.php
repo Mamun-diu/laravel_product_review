@@ -31,6 +31,7 @@ Route::post('/user/registration', [UserController::class, 'registration']);
 
 
 Route::group(['middleware' => ['admin']], function () {
+
     Route::view('/admin', 'backend.index');
     Route::get('/super/login', [AdminController::class, 'index']);
     Route::get('admin/logout', [AdminController::class, 'logout']);
@@ -41,7 +42,8 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin/find/sub/{id}', [SubCategoryController::class, 'findSub']);
     Route::get('/admin/find/tiny/{id}', [TinyCategoryController::class, 'findTiny']);
     Route::get('/admin/add/product', [ProductController::class, 'create']);
-
+    Route::post('admin/product/store', [ProductController::class, 'store']);
+    Route::get('/admin/product/show', [ProductController::class, 'index']);
 });
 Route::group(['middleware' => ['user']], function () {
     Route::get('/login', [UserController::class, 'login']);

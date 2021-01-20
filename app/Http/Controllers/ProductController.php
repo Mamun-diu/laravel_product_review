@@ -17,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = Product::all();
+        return view('backend.test')->with('product',$product);
     }
 
     /**
@@ -39,7 +40,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->name;
+        $image = $request->file('image');
+        $imageName = time().'.'.$image->extension();
+        $image->move(public_path('images'),$imageName);
+
+        $product = new Product;
+        $product->tiny_category_id = $request->tiny_category_id;
+        $product->name = $request->product_name;
+        $product->brand = $request->product_model;
+        $product->details = $request->details;
+        $product->image = $imageName;
+
+        $product->save();
+        return Redirect()->back();
     }
 
     /**
