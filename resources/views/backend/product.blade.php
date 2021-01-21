@@ -1,5 +1,11 @@
 @extends('backend/master')
 @section('content')
+
+@if(count($errors) > 0)
+    @foreach($errors->all() as $error)
+        <div class="alert alert-danger">{{ $error }}</div>
+    @endforeach
+@endif
 <form id="form" action="{{ URL::to('admin/product/store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row g-0 m-3 bg-light rounded">
@@ -29,15 +35,30 @@
         </div>
         <div class="col-4 p-2">
             <div class="form-group">
-                <input class="form-control mb-2" type="text" name="product_name" placeholder="Enter Product Name">
+                <input class="form-control mb-2" type="text" name="name" placeholder="Enter Product Name">
             </div>
             <div class="form-group">
                 <input class="form-control mb-2" type="text" name="product_model" placeholder="Enter Product Model">
             </div>
-        </div>
-        <div class="col-4 p-2">
             <div class="form-group">
                 <input type="file" name="image" class="form-control required">
+            </div>
+        </div>
+        <div class="col-4 p-2">
+            <div class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h3 class="text-center border-bottom pb-1">Add Price</h3>
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-2" name="web_name" placeholder="Enter Website Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control mb-2" name="price" placeholder="Enter Product Price">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control mb-2" name="web_link" placeholder="Enter Website Link">
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -57,9 +78,13 @@
             let main = document.querySelector('.main_category_select');
             let sub = document.querySelector('.sub_category_select');
             let tiny = document.querySelector(".tiny_category_select");
-            let product_name = document.querySelector("input[name='product_name']");
+            let product_name = document.querySelector("input[name='name']");
             let product_model = document.querySelector("input[name='product_model']");
             let textarea = document.getElementById('mytextarea');
+
+            let web_name = document.querySelector("input[name='web_name']");
+            let price = document.querySelector("input[name='price']");
+            let web_link = document.querySelector("input[name='web_link']");
             if(main.value==0){
                 main.style.border = "2px solid red";
                 e.preventDefault();
@@ -96,6 +121,24 @@
             }else{
                 textarea.style.border = "1px solid #CED4DA";
             }
+            if(web_name.value.length <= 1){
+            web_name.style.border = "2px solid red";
+            e.preventDefault();
+        }else{
+            web_name.style.border = "1px solid #CED4DA";
+        }
+        if(price.value.length <= 0){
+            price.style.border = "2px solid red";
+            e.preventDefault();
+        }else{
+            price.style.border = "1px solid #CED4DA";
+        }
+        if(web_link.value.length <= 10){
+            web_link.style.border = "2px solid red";
+            e.preventDefault();
+        }else{
+            web_link.style.border = "1px solid #CED4DA";
+        }
 
         })
 

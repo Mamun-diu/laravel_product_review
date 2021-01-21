@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Price;
+use App\Models\Main_category;
 use Illuminate\Http\Request;
 
 class PriceController extends Controller
@@ -14,8 +15,14 @@ class PriceController extends Controller
      */
     public function index()
     {
-        //
+        $main_cat = Main_category::all();
+        $main="";
+        $sub="";
+        $tiny="";
+        $product_p="";
+        return view('backend.price',compact('main_cat','main','sub','tiny','product_p'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +42,13 @@ class PriceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $price = new Price;
+        $price->product_id = $request->product_id;
+        $price->website_name = $request->web_name;
+        $price->price = $request->price;
+        $price->link = $request->web_link;
+        $price->save();
+        return redirect('/admin/add/product');
     }
 
     /**

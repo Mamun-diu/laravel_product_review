@@ -13,9 +13,36 @@
     <link rel="icon" type="image/png" href="{{ asset('/public/icon/logo.png') }}">
     <link rel="stylesheet" href="{{ asset('/public/backend/css/style.css') }}">
     <title>Product Review</title>
+    <style>
+        *{
+            box-sizing: border-box !important;
+        }
+        .toastr{
+            position : absolute;
+            top : 60px;
+            right : 10px;
+            z-index: 1000;
+        }
+    </style>
   </head>
   <body>
+
     {{ view('backend/header') }}
+    <?php
+        $msg = Session::get('msg');
+        $error = Session::get('error');
+    ?>
+    @if($msg)
+        <div class="toastr alert alert-success">
+            {{ $msg }}
+        </div>
+    @endif
+    @if($error)
+        <div class="toastr alert alert-danger">
+            {{ $error }}
+        </div>
+    @endif
+    <span class="toastr"></span>
     <div style="background: #F0F1F2; min-height: 500px" class="row g-0">
         <div class="col-2">
             {{ view('backend/sidebar') }}
@@ -34,6 +61,10 @@
         tinymce.init({
           selector: '#mytextarea'
         });
+
+        setTimeout(() => {
+            document.querySelector('.toastr').style.display = 'none';
+        }, 25000);
       </script>
 
   </body>
