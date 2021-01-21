@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Price;
 use App\Models\Main_category;
+use DB;
 use Illuminate\Http\Request;
 
 class PriceController extends Controller
@@ -42,13 +43,27 @@ class PriceController extends Controller
      */
     public function store(Request $request)
     {
-        $price = new Price;
-        $price->product_id = $request->product_id;
-        $price->website_name = $request->web_name;
-        $price->price = $request->price;
-        $price->link = $request->web_link;
-        $price->save();
-        return redirect('/admin/add/product');
+        // $data = DB::table('prices')->where('product_id', '=', $request->product_id and 'website_name', '=', $request->web_name)->get();
+
+        $data = Price::where('product_id', '=', $request->product_id, 'and')->where('website_name', '=', $request->web_name)->get();
+
+        if($data == '[]'){
+            // $validate = $request->validate([
+            //     'website_name' => ' required|max:50',
+            //     'price' => 'required|numeric',
+            //     'link' => ['required','regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
+            // ]);
+            $price = new Price;
+            $price->product_id = $request->product_id;
+            $price->website_name = $request->web_name;
+            $price->price = $request->price;
+            $price->link = $request->web_link;
+            $price->save();
+            return Redirect()->back()->with('msg','Price added successfully');
+        }else{
+            return Redirect()->back()->with('error','This price is already on this website');
+        }
+
     }
 
     /**

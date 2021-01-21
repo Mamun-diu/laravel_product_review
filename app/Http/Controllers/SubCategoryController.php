@@ -35,11 +35,18 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = $request->validate([
+            'sub_category' => ' required|unique:sub_categories|max:50',
+        ]);
         $sub = new Sub_category;
         $sub->main_category_id = $request->main_category_id;
         $sub->sub_category = $request->sub_category;
         $sub->save();
-        return Redirect()->back();
+        if($sub){
+            return Redirect()->back()->with('msg','Sub Category Added');
+        }else{
+            return Redirect()->back()->with('error','Sub Category can not Added');
+        }
     }
 
     /**

@@ -43,6 +43,7 @@
         </div>
     @endif
     <span class="toastr"></span>
+    <span class="alert-danger"></span>
     <div style="background: #F0F1F2; min-height: 500px" class="row g-0">
         <div class="col-2">
             {{ view('backend/sidebar') }}
@@ -62,9 +63,20 @@
           selector: '#mytextarea'
         });
 
-        setTimeout(() => {
-            document.querySelector('.toastr').style.display = 'none';
-        }, 25000);
+        // setTimeout(() => {
+
+        //     document.querySelector('.toastr').style.display = 'none';
+        //     document.querySelectorAll('.alert-danger')[0].style.display = 'none';
+        //     document.querySelectorAll('.alert-danger')[1].style.display = 'none';
+        // }, 2500);
+      </script>
+      <script>
+          $(document).ready(function(){
+              setTimeout(() => {
+                $('.toastr').hide();
+                $('.alert-danger').hide();
+              }, 25000);
+          })
       </script>
 
   </body>

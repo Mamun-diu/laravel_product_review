@@ -124,21 +124,21 @@
             if(web_name.value.length <= 1){
             web_name.style.border = "2px solid red";
             e.preventDefault();
-        }else{
-            web_name.style.border = "1px solid #CED4DA";
-        }
-        if(price.value.length <= 0){
-            price.style.border = "2px solid red";
-            e.preventDefault();
-        }else{
-            price.style.border = "1px solid #CED4DA";
-        }
-        if(web_link.value.length <= 10){
-            web_link.style.border = "2px solid red";
-            e.preventDefault();
-        }else{
-            web_link.style.border = "1px solid #CED4DA";
-        }
+            }else{
+                web_name.style.border = "1px solid #CED4DA";
+            }
+            if(price.value.length <= 0){
+                price.style.border = "2px solid red";
+                e.preventDefault();
+            }else{
+                price.style.border = "1px solid #CED4DA";
+            }
+            if(web_link.value.length <= 10){
+                web_link.style.border = "2px solid red";
+                e.preventDefault();
+            }else{
+                web_link.style.border = "1px solid #CED4DA";
+            }
 
         })
 

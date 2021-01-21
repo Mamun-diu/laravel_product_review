@@ -1,5 +1,10 @@
 @extends('backend/master')
 @section('content')
+    @if(count($errors) > 0)
+        @foreach($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
     <div class="row categories g-0 m-3 bg-light rounded">
         <div class="main_category col-4">
             <div class="p-3">

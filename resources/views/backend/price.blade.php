@@ -1,6 +1,11 @@
 @extends('backend/master')
 @section('content')
 <div class="container ">
+    @if(count($errors) > 0)
+        @foreach($errors->all() as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
     <form id="form" action="{{ URL::to('/admin/store/price') }}" method="POST">
         @csrf
         <div class="row g-0 p-2 rounded bg-light m-2">

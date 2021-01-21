@@ -36,10 +36,18 @@ class MainCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = $request->validate([
+            'main_category' => ' required|unique:main_categories|max:50',
+        ]);
         $main = new Main_category;
         $main->main_category = $request->main_category;
         $main->save();
-        return Redirect()->back();
+        if($main){
+            return Redirect()->back()->with('msg','Main Category Added');
+        }else{
+            return Redirect()->back()->with('error','Main Category can not Added');
+        }
+
     }
 
     /**
