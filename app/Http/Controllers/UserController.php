@@ -44,10 +44,9 @@ class UserController extends Controller
     public function registration(Request $request){
         $validate = $request->validate([
             'name' => ['required'],
-            'email' => ['required', 'unique.users', 'max:255'],
+            'email' => ['required', 'unique:users', 'max:255'],
             'password' => ['required'],
-            're_password' => ['required'],
-            'phone' => ['required' , 'unique.users'],
+            'phone' => ['required' , 'unique:users'],
             'address' => ['required'],
         ]);
         if($validate){
@@ -127,5 +126,5 @@ class UserController extends Controller
     {
         //
     }
-    
+
 }

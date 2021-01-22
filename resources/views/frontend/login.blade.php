@@ -43,7 +43,7 @@
                     <div class="card-body">
                         <h5 class="card-title text-center border-bottom p-2">User Registration</h5>
 
-                        <form action="{{ URL::to('/user/registration') }}" method="post">
+                        <form id="reg" action="{{ URL::to('/user/registration') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <input id="name" type="text" class="form-control mt-2" name="name" placeholder="Enter Username...">
@@ -77,6 +77,8 @@
         let register = document.getElementById('register');
         let no_account = document.querySelector('.no-account');
         let have_account = document.querySelector('.have-account');
+        let name = document.getElementById('name');
+        name.style.backgroundColor = "red !important";
         no_account.addEventListener('click',function(){
             login.classList.add('login');
             register.classList.add('register');
@@ -102,5 +104,35 @@
         setTimeout(() => {
             document.querySelector('.error').innerHTML = '';
         }, 2000);
+        let reg = document.getElementById('reg');
+        reg.addEventListener('submit',function(e){
+            let name = document.getElementById('name');
+            let email = document.querySelector('#register input[name="email"]');
+            let phone = document.querySelector('#register input[name="phone"]');
+            let password = document.querySelector('#register input[name="password"]');
+            let re_password = document.querySelector('#register input[name="re_password"]');
+            let address = document.querySelector('#register textarea[name="address"]');
+
+            function validate(values) {
+                if(values.value == ''){
+                    values.style.setProperty('border-bottom', '2px solid red', 'important');
+                    e.preventDefault();
+                }else{
+                    values.style.setProperty('border-bottom','solid #03e9fe', 'important');
+                }
+            }
+            validate(name);
+            validate(email);
+            validate(phone);
+            validate(password);
+            validate(re_password);
+            validate(address);
+            if(password.value != re_password.value){
+                password.style.setProperty('border-bottom', '2px solid red', 'important');
+                re_password.style.setProperty('border-bottom', '2px solid red', 'important');
+                e.preventDefault();
+            }
+
+        })
     </script>
 @endsection

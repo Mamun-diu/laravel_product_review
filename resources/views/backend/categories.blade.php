@@ -111,6 +111,8 @@
             let main = document.querySelector('.tiny_main_category_select');
             let sub = document.querySelector('.tiny_sub_category_select');
             let tiny = document.querySelector("input[name='tiny_category']");
+
+            
             if(main.value==0){
                 main.style.border = "2px solid red";
                 e.preventDefault();

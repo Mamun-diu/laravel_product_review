@@ -45,19 +45,21 @@ class PriceController extends Controller
     {
         // $data = DB::table('prices')->where('product_id', '=', $request->product_id and 'website_name', '=', $request->web_name)->get();
 
-        $data = Price::where('product_id', '=', $request->product_id, 'and')->where('website_name', '=', $request->web_name)->get();
 
-        if($data == '[]'){
-            // $validate = $request->validate([
-            //     'website_name' => ' required|max:50',
-            //     'price' => 'required|numeric',
-            //     'link' => ['required','regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
-            // ]);
+
+
+            $validate = $request->validate([
+                'website_name' => ' required|max:50',
+                'price' => 'required|numeric',
+                'link' => ['required','regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
+            ]);
             $price = new Price;
             $price->product_id = $request->product_id;
             $price->website_name = $request->web_name;
             $price->price = $request->price;
             $price->link = $request->web_link;
+            $data = Price::where('product_id', '=', $request->product_id, 'and')->where('website_name', '=', $request->web_name)->get();
+        if($data == '[]'){
             $price->save();
             return Redirect()->back()->with('msg','Price added successfully');
         }else{
