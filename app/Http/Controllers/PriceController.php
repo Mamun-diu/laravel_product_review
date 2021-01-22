@@ -43,28 +43,25 @@ class PriceController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = DB::table('prices')->where('product_id', '=', $request->product_id and 'website_name', '=', $request->web_name)->get();
-
-
-
-
+        
             $validate = $request->validate([
-                'website_name' => ' required|max:50',
+                'web_name' => 'required',
                 'price' => 'required|numeric',
-                'link' => ['required','regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
+                'web_link' => ['required','regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
             ]);
             $price = new Price;
             $price->product_id = $request->product_id;
             $price->website_name = $request->web_name;
             $price->price = $request->price;
             $price->link = $request->web_link;
+
             $data = Price::where('product_id', '=', $request->product_id, 'and')->where('website_name', '=', $request->web_name)->get();
-        if($data == '[]'){
-            $price->save();
-            return Redirect()->back()->with('msg','Price added successfully');
-        }else{
-            return Redirect()->back()->with('error','This price is already on this website');
-        }
+            if($data == '[]'){
+                $price->save();
+                return Redirect()->back()->with('msg','Price added successfully');
+            }else{
+                return Redirect()->back()->with('error','This price is already on this website');
+            }
 
     }
 
