@@ -22,12 +22,12 @@ class MainCategoryController extends Controller
         //         ->join('main_categories','sub_categories.main_category_id','main_categories.id')
         //         ->get();
         // return response()->json($tiny);
-        $main = Main_category::paginate(5, '*','main');
+        $main = Main_category::paginate(10, '*','main');
         // $main2 = Main_category::find(8)->subCategory;  //paginate(5, '*','main');
 
-        $sub = Sub_category::with('mainCategory')->paginate(5, '*','sub');
+        $sub = Sub_category::with('mainCategory')->paginate(10, '*','sub');
         //  return response()->json($sub) ;
-        $tiny = Tiny_category::with('mainCategory','subCategory')->paginate(1, '*','tiny');
+        $tiny = Tiny_category::with('mainCategory','subCategory')->paginate(10, '*','tiny');
         // return response()->json($tiny) ;
         return view('backend.show_category',compact('main','sub','tiny'));
     }

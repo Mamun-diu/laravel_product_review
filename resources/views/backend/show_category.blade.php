@@ -20,7 +20,7 @@
             @endforeach
         </table>
         <div>
-            {{-- {{ $main->links() }} --}}
+            {{ $main->links() }}
         </div>
     </div>
     <div class="p-2 rounded bg-light m-2 mb-4">
