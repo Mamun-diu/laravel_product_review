@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2021 at 06:11 AM
+-- Generation Time: Jan 23, 2021 at 11:10 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -131,6 +131,7 @@ CREATE TABLE `products` (
   `brand` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `details` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'publish',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -295,7 +296,7 @@ ALTER TABLE `favourites`
 -- AUTO_INCREMENT for table `main_categories`
 --
 ALTER TABLE `main_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -325,13 +326,13 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tiny_categories`
 --
 ALTER TABLE `tiny_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
