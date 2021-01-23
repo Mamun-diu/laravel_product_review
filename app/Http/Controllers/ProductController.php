@@ -18,8 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        return view('backend.test')->with('product',$product);
+        $product = Product::orderByRaw('id DESC')->paginate(20);
+        return view('backend.show_product')->with('product',$product);
     }
 
     /**
@@ -134,5 +134,17 @@ class ProductController extends Controller
     public function findProduct($id){
         $product = Product::where('tiny_category_id',$id)->get();
         return response()->json($product);
+    }
+    public function findCat($id){
+        $main = Product::find($id)->main->main_category;
+        $sub = Product::find($id)->sub->sub_category;
+        $tiny = Product::find($id)->tiny->tiny_category;
+        $data = [$main,$sub,$tiny];
+        return response()->json($data);
+
+    }
+    public function findPrice($id){
+        $price = Price::where('product_id',$id)->get();
+        return response()->json($price);
     }
 }

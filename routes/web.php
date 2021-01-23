@@ -35,19 +35,28 @@ Route::group(['middleware' => ['admin']], function () {
     Route::view('/admin', 'backend.index');
     Route::get('/super/login', [AdminController::class, 'index']);
     Route::get('admin/logout', [AdminController::class, 'logout']);
+
     Route::get('admin/add/category', [MainCategoryController::class, 'create']);
     Route::post('/admin/main/category', [MainCategoryController::class, 'store']);
+    Route::get('/admin/show/category', [MainCategoryController::class, 'index']);
+
     Route::post('admin/sub/category', [SubCategoryController::class, 'store']);
-    Route::post('admin/tiny/category', [TinyCategoryController::class, 'store']);
     Route::get('/admin/find/sub/{id}', [SubCategoryController::class, 'findSub']);
+
+    Route::post('admin/tiny/category', [TinyCategoryController::class, 'store']);
     Route::get('/admin/find/tiny/{id}', [TinyCategoryController::class, 'findTiny']);
+
     Route::get('/admin/add/product', [ProductController::class, 'create']);
     Route::post('/admin/product/store', [ProductController::class, 'store']);
     Route::get('/admin/product/show', [ProductController::class, 'index']);
-    Route::get('/admin/add/price', [PriceController::class, 'index']);
+    Route::get('/admin/find/cat/{id}', [ProductController::class, 'findCat']);
+    Route::get('/admin/find/price/{id}', [ProductController::class, 'findPrice']);
     Route::get('/admin/find/product/{id}', [ProductController::class, 'findProduct']);
+
     Route::post('/admin/store/price', [PriceController::class, 'store']);
-    Route::get('/admin/show/category', [MainCategoryController::class, 'index']);
+    Route::get('/admin/add/price', [PriceController::class, 'index']);
+
+
 });
 Route::group(['middleware' => ['user']], function () {
     Route::get('/login', [UserController::class, 'login']);

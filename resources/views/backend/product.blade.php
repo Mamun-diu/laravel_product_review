@@ -38,7 +38,7 @@
                 <input class="form-control mb-2" type="text" name="name" placeholder="Enter Product Name">
             </div>
             <div class="form-group">
-                <input class="form-control mb-2" type="text" name="product_model" placeholder="Enter Product Model">
+                <input class="form-control mb-2" type="text" name="product_model" placeholder="Enter Brand/Model">
             </div>
             <div class="form-group">
                 <input type="file" name="image" class="form-control required">
