@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Main_category;
+use App\Models\Sub_category;
+use App\Models\Tiny_category;
 use Illuminate\Http\Request;
+use DB;
 
 class MainCategoryController extends Controller
 {
@@ -14,7 +17,19 @@ class MainCategoryController extends Controller
      */
     public function index()
     {
+        // $tiny = DB::table('tiny_categories')
+        //         ->join('sub_categories', 'tiny_categories.sub_category_id','sub_categories.id')
+        //         ->join('main_categories','sub_categories.main_category_id','main_categories.id')
+        //         ->get();
+        // return response()->json($tiny);
+        $main = Main_category::paginate(5, '*','main');
+        // $main2 = Main_category::find(8)->subCategory;  //paginate(5, '*','main');
 
+        $sub = Sub_category::with('mainCategory')->paginate(5, '*','sub');
+        //  return response()->json($sub) ;
+        $tiny = Tiny_category::with('mainCategory','subCategory')->paginate(1, '*','tiny');
+        // return response()->json($tiny) ;
+        return view('backend.show_category',compact('main','sub','tiny'));
     }
 
     /**

@@ -47,6 +47,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin/add/price', [PriceController::class, 'index']);
     Route::get('/admin/find/product/{id}', [ProductController::class, 'findProduct']);
     Route::post('/admin/store/price', [PriceController::class, 'store']);
+    Route::get('/admin/show/category', [MainCategoryController::class, 'index']);
 });
 Route::group(['middleware' => ['user']], function () {
     Route::get('/login', [UserController::class, 'login']);

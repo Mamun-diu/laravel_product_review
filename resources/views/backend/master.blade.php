@@ -44,7 +44,7 @@
     @endif
     <span class="toastr"></span>
     <span class="alert-danger"></span>
-    <div style="background: #F0F1F2; min-height: 500px" class="row g-0">
+    <div style="background: #F0F1F2; min-height: 500px;margin-top:60px" class="row g-0">
         <div class="col-2">
             {{ view('backend/sidebar') }}
         </div>
@@ -75,7 +75,7 @@
               setTimeout(() => {
                 $('.toastr').hide();
                 $('.alert-danger').hide();
-              }, 25000);
+              }, 2500);
           })
       </script>
 

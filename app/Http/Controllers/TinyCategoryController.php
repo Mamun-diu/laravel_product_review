@@ -39,6 +39,7 @@ class TinyCategoryController extends Controller
             'tiny_category' => ' required|unique:tiny_categories|max:50',
         ]);
         $cat = new Tiny_category;
+        $cat->main_category_id = $request->main_category_id;
         $cat->sub_category_id = $request->sub_category_id;
         $cat->tiny_category = $request->tiny_category;
         $cat->save();

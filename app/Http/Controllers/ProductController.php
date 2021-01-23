@@ -53,6 +53,8 @@ class ProductController extends Controller
 
             $product = new Product;
             $product->tiny_category_id = $request->tiny_category_id;
+            $product->sub_category_id = $request->sub_category_id;
+            $product->main_category_id = $request->main_category_id;
             $product->name = $request->name;
             $product->brand = $request->product_model;
             $product->details = $request->details;

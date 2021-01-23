@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2021 at 04:38 AM
+-- Generation Time: Jan 23, 2021 at 06:11 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -124,6 +124,8 @@ CREATE TABLE `prices` (
 
 CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `main_category_id` int(11) NOT NULL,
+  `sub_category_id` int(11) NOT NULL,
   `tiny_category_id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `brand` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -171,6 +173,7 @@ CREATE TABLE `sub_categories` (
 
 CREATE TABLE `tiny_categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `main_category_id` int(11) NOT NULL,
   `sub_category_id` int(11) NOT NULL,
   `tiny_category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -200,7 +203,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `password`, `image`, `address`, `created_at`, `updated_at`) VALUES
-(2, 'Al Mamun', 'user@gmail.com', '01751151078', '$2y$10$s5rJdloKLeKEfp9L7CJY5eV5W.nVqoXkwGY/iBCQYF5YjyTHeIXwG', NULL, 'Dinajpur', '2021-01-18 13:10:28', '2021-01-18 13:10:28');
+(2, 'Al Mamun', 'user@gmail.com', '01751151078', '$2y$10$s5rJdloKLeKEfp9L7CJY5eV5W.nVqoXkwGY/iBCQYF5YjyTHeIXwG', NULL, 'Dinajpur', '2021-01-18 13:10:28', '2021-01-18 13:10:28'),
+(3, 'Emran', 'emran@gmail.com', '01754878965', '$2y$10$/G5mYfdeWSq.WVTOEKpW9O2nJ90xmwYvj5v/oB2R2YRhFgwXoSVdS', NULL, 'Dinajpur', '2021-01-21 12:47:31', '2021-01-21 12:47:31');
 
 --
 -- Indexes for dumped tables
@@ -291,7 +295,7 @@ ALTER TABLE `favourites`
 -- AUTO_INCREMENT for table `main_categories`
 --
 ALTER TABLE `main_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -303,13 +307,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `prices`
 --
 ALTER TABLE `prices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -321,19 +325,19 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tiny_categories`
 --
 ALTER TABLE `tiny_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
