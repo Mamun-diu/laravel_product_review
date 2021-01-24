@@ -21,7 +21,10 @@
                 <td>{{ $data->name }}</td>
                 <td>{{ $data->brand }}</td>
                 <td><img width="50px" height="30px" src="{{ asset('public/images/'.$data->image) }}" alt=""></td>
-                <td>{{ $data->status }}</td>
+                <td class="d-flex justify-content-between align-items-center">
+                  <h5 style="color: {{ ($data->status=='publish')?'blue':'red' }} "  class="d-inline-block ">{{ $data->status }}</h5>
+                  <i style="cursor: pointer" class="fas fa-sync-alt status" data-id="{{ $data->id }}"></i>
+                </td>
                 <td><button class="btn btn-sm btn-success category" data-bs-toggle="modal" data-bs-target="#category" data-id="{{ $data->id }}">Check Category</button></td>
                 <td><button class="btn btn-sm btn-success price" data-bs-toggle="modal" data-bs-target="#price" data-id="{{ $data->id }}">Check Price</button></td>
 
@@ -139,8 +142,38 @@
                             });
                         }
                     })
-                })
             })
+
+            $(document).on('click','.status',function(){
+                // $('.price_table').html('');
+                var id = $(this).data('id');
+                var status_icon = $(this);
+                $(status_icon).css({'transform': 'rotate(360deg)'});
+                var status = $(this).prev();
+                // console.log(status.text());
+
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{URL::to("/admin/change/status/")}}/'+id,
+
+                        success: function(data){
+                            $(status_icon).css({'transform': 'rotate(0deg)'});
+                            if(data=='unpublish'){
+                                $(status).css({'color':'red' });
+                            }else{
+                                $(status).css({'color':'blue' });
+                            }
+                            $(status).text(data);
+
+                            // data.forEach(price => {
+                            //     $('.price_table').append('<tr><td>'+price.website_name+'</td><td>'+price.price+'</td><td><a class="btn btn-sm btn-primary" target="_blank" href="'+price.link+'">Go</a></td></tr>');
+                            // });
+                        }
+                    })
+            })
+
+          })
 
     </script>
 @endsection

@@ -86,3 +86,11 @@ ul#sidebar li:hover{
     background : #0d6efd3d;
     position : relative;
 }
+.status{
+    color : #00000088;
+    transition: 0.5s;
+}
+.status:hover{
+    color : #000;
+    
+}

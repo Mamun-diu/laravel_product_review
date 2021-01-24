@@ -52,6 +52,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin/find/cat/{id}', [ProductController::class, 'findCat']);
     Route::get('/admin/find/price/{id}', [ProductController::class, 'findPrice']);
     Route::get('/admin/find/product/{id}', [ProductController::class, 'findProduct']);
+    Route::get('/admin/change/status/{id}', [ProductController::class, 'changeStatus']);
 
     Route::post('/admin/store/price', [PriceController::class, 'store']);
     Route::get('/admin/add/price', [PriceController::class, 'index']);

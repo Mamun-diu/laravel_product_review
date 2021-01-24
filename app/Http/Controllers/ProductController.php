@@ -147,4 +147,18 @@ class ProductController extends Controller
         $price = Price::where('product_id',$id)->get();
         return response()->json($price);
     }
+    public function changeStatus($id){
+        $status = Product::find($id);
+        if($status->status == 'publish'){
+            $newStatus = Product::find($id);
+            $newStatus->status = 'unpublish';
+            $newStatus->save();
+            return response()->json('unpublish');
+        }else{
+            $newStatus = Product::find($id);
+            $newStatus->status = 'publish';
+            $newStatus->save();
+            return response()->json('publish');
+        }
+    }
 }
