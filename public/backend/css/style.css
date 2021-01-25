@@ -86,11 +86,24 @@ ul#sidebar li:hover{
     background : #0d6efd3d;
     position : relative;
 }
+td h5{
+    transition: 0.5s;
+}
 .status{
     color : #00000088;
     transition: 0.5s;
 }
 .status:hover{
     color : #000;
-    
+
 }
+.category,.price{
+    cursor: pointer;
+}
+.category:hover{
+    color : #000 !important;
+}
+.price:hover{
+    color : #000 !important;
+}
+

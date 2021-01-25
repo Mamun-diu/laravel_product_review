@@ -68,9 +68,10 @@ class TinyCategoryController extends Controller
      * @param  \App\Models\Tiny_category  $tiny_category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tiny_category $tiny_category)
+    public function edit($id)
     {
-        //
+        $tiny = Tiny_category::where('id',$id)->with('subCategory','mainCategory')->get();
+        return response()->json($tiny);
     }
 
     /**
@@ -80,9 +81,17 @@ class TinyCategoryController extends Controller
      * @param  \App\Models\Tiny_category  $tiny_category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tiny_category $tiny_category)
+    public function update(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'tiny_category' => ' required|unique:tiny_categories,tiny_category,'.$request->id,
+        ]);
+        $tiny = Tiny_category::find($request->id);
+        $tiny->main_category_id = $request->main_category_id;
+        $tiny->sub_category_id = $request->sub_category_id;
+        $tiny->tiny_category = $request->tiny_category;
+        $tiny->save();
+        return Redirect()->back()->with('msg','Tiny Category Updated Successfully');
     }
 
     /**

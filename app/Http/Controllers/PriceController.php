@@ -43,7 +43,7 @@ class PriceController extends Controller
      */
     public function store(Request $request)
     {
-        
+
             $validate = $request->validate([
                 'web_name' => 'required',
                 'price' => 'required|numeric',
@@ -108,5 +108,28 @@ class PriceController extends Controller
     public function destroy(Price $price)
     {
         //
+    }
+
+    public function updatePrice(Request $request){
+        $validate = $request->validate([
+            'web' => 'required',
+            'price' => 'required|numeric',
+            'link' => ['required','regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
+        ]);
+        $price = Price::find($request->id);
+        $price->website_name = $request->web;
+        $price->price = $request->price;
+        $price->link = $request->link;
+        $price->save();
+        if($price){
+            return response()->json($price);
+        }
+
+    }
+    public function findPrice($id){
+        $price = Price::where('id',$id)->get();
+        $allPrice = Price::where('product_id',$price[0]->product_id)->get();
+        return response()->json($allPrice);
+        // return response()->json($price[0]);
     }
 }

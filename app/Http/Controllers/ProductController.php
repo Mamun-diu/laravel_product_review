@@ -93,9 +93,16 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $main = Main_category::all();
+        $product = Product::find($id);
+        $main_cat = Main_category::find($product->main_category_id);
+        $sub_cat = Sub_category::find($product->sub_category_id);
+        $tiny_cat = Tiny_category::find($product->tiny_category_id);
+
+        // return response()->json($tiny_cat);
+        return view('backend.edit_product',compact('main','product','main_cat','sub_cat','tiny_cat'));
     }
 
     /**
@@ -116,9 +123,42 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product, $id)
     {
-        //
+
+        $validate = $request->validate([
+            'name' => ' required|unique:products,name,'.$id,
+            'product_model' => ' required|max:50',
+            'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+        ]);
+        if($request->file('image')==''){
+            $old = Product::find($id);
+            $imageName = $old->image;
+
+        }else{
+            $old = Product::find($id);
+            $oldImage = $old->image;
+            unlink('public/images/'.$oldImage);
+
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->extension();
+            $image->move(public_path('images'),$imageName);
+
+        }
+
+
+        $product = Product::find($id);
+        $product->tiny_category_id = $request->tiny_category_id;
+        $product->sub_category_id = $request->sub_category_id;
+        $product->main_category_id = $request->main_category_id;
+        $product->name = $request->name;
+        $product->brand = $request->product_model;
+        $product->details = $request->details;
+        $product->image = $imageName;
+
+        $product->save();
+        return redirect('/admin/product/show')->with('msg','Product Updated Successfully');
+
     }
 
     /**
@@ -161,4 +201,15 @@ class ProductController extends Controller
             return response()->json('publish');
         }
     }
+    public function getProduct($id){
+        $main = Product::find($id)->main->main_category;
+        $sub = Product::find($id)->sub->sub_category;
+        $tiny = Product::find($id)->tiny->tiny_category;
+        $cat = [$main,$sub,$tiny];
+        $product = Product::find($id);
+        $price = Product::find($id)->price;
+        $data = [$cat,$product,$price];
+        return response()->json($data);
+    }
+
 }

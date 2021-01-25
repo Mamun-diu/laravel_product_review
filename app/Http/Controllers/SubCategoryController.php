@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sub_category;
+use App\Models\Tiny_category;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
@@ -66,9 +67,10 @@ class SubCategoryController extends Controller
      * @param  \App\Models\Sub_category  $sub_category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sub_category $sub_category)
+    public function edit($id)
     {
-        //
+        $sub = Sub_category::where('id',$id)->with('mainCategory')->get();
+        return response()->json($sub);
     }
 
     /**
@@ -78,9 +80,21 @@ class SubCategoryController extends Controller
      * @param  \App\Models\Sub_category  $sub_category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sub_category $sub_category)
+    public function update(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'sub_category' => ' required|unique:sub_categories,sub_category,'.$request->id,
+        ]);
+        $sub = Sub_category::find($request->id);
+        $sub->main_category_id = $request->main_category_id;
+        $sub->sub_category = $request->sub_category;
+        $sub->save();
+        $tiny = Tiny_category::where('sub_category_id',$request->id)
+        ->update(['main_category_id'=> $request->main_category_id],['sub_category_id'=>$request->id]);
+        // $tiny->main_category_id = $request->main_category_id;
+        // $tiny->sub_category_id = $request->id;
+        // $tiny->save();
+        return Redirect()->back()->with('msg','Sub Category Updated Successfully');
     }
 
     /**

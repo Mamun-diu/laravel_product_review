@@ -17,4 +17,7 @@ class Product extends Model
     public function tiny(){
         return $this->belongsTo(Tiny_category::class,'tiny_category_id');
     }
+    public function price(){
+        return $this->hasMany(Price::class);
+    }
 }

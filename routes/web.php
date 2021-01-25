@@ -39,12 +39,17 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('admin/add/category', [MainCategoryController::class, 'create']);
     Route::post('/admin/main/category', [MainCategoryController::class, 'store']);
     Route::get('/admin/show/category', [MainCategoryController::class, 'index']);
+    Route::post('/admin/main/update', [MainCategoryController::class, 'update']);
 
     Route::post('admin/sub/category', [SubCategoryController::class, 'store']);
     Route::get('/admin/find/sub/{id}', [SubCategoryController::class, 'findSub']);
+    Route::get('/admin/edit/sub/{id}', [SubCategoryController::class, 'edit']);
+    Route::post('/admin/sub/update', [SubCategoryController::class, 'update']);
 
     Route::post('admin/tiny/category', [TinyCategoryController::class, 'store']);
     Route::get('/admin/find/tiny/{id}', [TinyCategoryController::class, 'findTiny']);
+    Route::get('/admin/edit/tiny/{id}', [TinyCategoryController::class, 'edit']);
+    Route::post('/admin/tiny/update', [TinyCategoryController::class, 'update']);
 
     Route::get('/admin/add/product', [ProductController::class, 'create']);
     Route::post('/admin/product/store', [ProductController::class, 'store']);
@@ -53,9 +58,15 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin/find/price/{id}', [ProductController::class, 'findPrice']);
     Route::get('/admin/find/product/{id}', [ProductController::class, 'findProduct']);
     Route::get('/admin/change/status/{id}', [ProductController::class, 'changeStatus']);
+    Route::get('/admin/get/product/{id}', [ProductController::class, 'getProduct']);
+    Route::get('/admin/edit/product/{id}', [ProductController::class, 'show']);
+    Route::post('/admin/product/update/{id}', [ProductController::class, 'update']);
+
 
     Route::post('/admin/store/price', [PriceController::class, 'store']);
     Route::get('/admin/add/price', [PriceController::class, 'index']);
+    Route::post('/admin/update/price', [PriceController::class, 'updatePrice']);
+    Route::get('/admin/find/price_table/{id}', [PriceController::class, 'findPrice']);
 
 
 });

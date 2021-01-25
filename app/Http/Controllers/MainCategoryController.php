@@ -94,9 +94,15 @@ class MainCategoryController extends Controller
      * @param  \App\Models\Main_category  $main_category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Main_category $main_category)
+    public function update(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'main_category' => ' required|unique:main_categories,main_category,'.$request->id,
+        ]);
+        $main = Main_category::find($request->id);
+        $main->main_category = $request->main_category;
+        $main->save();
+        return Redirect()->back()->with('msg','Main Category Updated Successfully');
     }
 
     /**
