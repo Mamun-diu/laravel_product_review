@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Main_category;
 use App\Models\Sub_category;
 use App\Models\Tiny_category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use DB;
 
@@ -114,6 +115,12 @@ class MainCategoryController extends Controller
     public function destroy(Main_category $main_category)
     {
         //
+    }
+    public function getMain(){
+        $cat = Main_category::all();
+        $product = Product::orderByRaw('id DESC')->paginate(5);
+        // return response()->json($product);
+        return view('frontend.index',compact('cat','product'));
     }
 
 }

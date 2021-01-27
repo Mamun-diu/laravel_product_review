@@ -109,3 +109,56 @@
     border-bottom : 2px solid #000000 !important;
     box-shadow:none !important;
 }
+
+
+/* Category */
+.top-index{
+    overflow: hidden;
+}
+.category{
+    position: relative;
+    width : 25%;
+    float : left;
+}
+.category .sub_category{
+    position: absolute;
+    top: 0;
+    left: 218px;
+    width: 220px;
+    z-index: 10;
+}
+.category .tiny_category{
+    position: absolute;
+    top: 0;
+    left: 438px;
+    width: 220px;
+    z-index: 10;
+}
+.list-group-item {
+    padding: 4px 1rem !important;
+}
+.slider{
+    margin-left : 1%;
+    width : 74%;
+    float : left;
+}
+.carousel-caption{
+    margin-bottom: 25px !important;
+}
+.carousel-indicators li {
+    box-sizing: content-box;
+    flex: 0 1 auto;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    background-clip: padding-box;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    opacity: .5;
+    transition: opacity .6s ease;
+}

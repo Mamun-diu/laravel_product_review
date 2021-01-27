@@ -22,12 +22,18 @@ use App\Http\Controllers\TinyCategoryController;
 |
 */
 
-Route::view('/', 'frontend.index');
+// Route::view('/', 'frontend.index');
+
 
 Route::post('/login', [AdminController::class, 'login']);
 Route::post('/user/login', [UserController::class, 'checkLogin']);
 Route::post('/user/registration', [UserController::class, 'registration']);
 
+Route::get('/', [MainCategoryController::class, 'getMain']);
+
+Route::get('/get/sub/category/{id}', [SubCategoryController::class, 'findSub']);
+
+Route::get('/get/tiny/category/{id}', [TinyCategoryController::class, 'findTiny']);
 
 
 Route::group(['middleware' => ['admin']], function () {
