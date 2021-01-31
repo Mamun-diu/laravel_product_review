@@ -105,6 +105,36 @@
             }else{
                 sub.style.border = "2px solid #CED4DA";
             }
+            if(main.value != 0 && sub.value != ''){
+                e.preventDefault();
+                $(document).ready(function(){
+                    $.ajaxSetup({
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                        }
+                    })
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ URL::to('admin/sub/category') }}',
+                        data: {
+                            "main_category_id":main.value,
+                            "sub_category":sub.value
+                        },
+                        success: function(data){
+                            $("input[name='sub_category']").val('');
+                            $("body").append('<div class="toastr alert alert-success">Sub Category Added</div>');
+                            setTimeout(() => {
+                                $('.toastr').hide();
+                            }, 1000);
+
+                        }
+                    })
+                })
+
+
+            }
+
+
         })
         let tiny_form = document.getElementById('tiny_form');
         tiny_form.addEventListener('submit',function(e){
@@ -112,7 +142,7 @@
             let sub = document.querySelector('.tiny_sub_category_select');
             let tiny = document.querySelector("input[name='tiny_category']");
 
-            
+
             if(main.value==0){
                 main.style.border = "2px solid red";
                 e.preventDefault();
@@ -131,6 +161,35 @@
                 e.preventDefault();
             }else{
                 tiny.style.border = "2px solid #CED4DA";
+            }
+            if(main.value != 0 && sub.value != '' && tiny.value != ''){
+                e.preventDefault();
+                $(document).ready(function(){
+                    $.ajaxSetup({
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                        }
+                    })
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ URL::to('admin/tiny/category') }}',
+                        data: {
+                            "main_category_id":main.value,
+                            "sub_category_id":sub.value,
+                            "tiny_category":tiny.value
+                        },
+                        success: function(data){
+                            $("input[name='tiny_category']").val('');
+                            $("body").append('<div class="toastr alert alert-success">Tiny Category Added</div>');
+                            setTimeout(() => {
+                                $('.toastr').hide();
+                            }, 1000);
+
+                        }
+                    })
+                })
+
+
             }
         })
 
