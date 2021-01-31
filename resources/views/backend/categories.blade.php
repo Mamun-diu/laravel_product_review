@@ -127,7 +127,15 @@
                                 $('.toastr').hide();
                             }, 1000);
 
-                        }
+                        },
+                        error: function (data) {
+                            if(data.status===422){
+                                $("input[name='sub_category']").val('');
+                                console.log('something wrong');
+
+                            }
+
+                         }
                     })
                 })
 
@@ -185,7 +193,10 @@
                                 $('.toastr').hide();
                             }, 1000);
 
-                        }
+                        },
+                        error: function (data) {
+                            $("input[name='tiny_category']").val('');
+                         }
                     })
                 })
 
