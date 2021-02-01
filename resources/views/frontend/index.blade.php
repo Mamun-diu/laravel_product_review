@@ -93,7 +93,7 @@
                 success: function(data){
                     $(".sub_ul").html('');
                     data.forEach(element =>{
-                        $(".sub_ul").prepend(
+                        $(".sub_ul").append(
                         '<li data-sub="'+element.id+'" class="list-group-item sub_li">'+element.sub_category+'</li>'
                     );
                     })
@@ -112,7 +112,7 @@
                 success: function(data){
                     $(".tiny_ul").html('');
                     data.forEach(element =>{
-                        $(".tiny_ul").prepend(
+                        $(".tiny_ul").append(
                         '<li data-tiny="'+element.id+'" class="list-group-item sub_li">'+element.tiny_category+'</li>'
                     );
                     })
