@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'name' => ' required|unique:products|max:50',
+            'name' => ' required|unique:products',
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
         ]);
             if($validate){
@@ -128,7 +128,7 @@ class ProductController extends Controller
 
         $validate = $request->validate([
             'name' => ' required|unique:products,name,'.$id,
-            'product_model' => ' required|max:50',
+            'product_model' => ' required',
             'image' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
         ]);
         if($request->file('image')==''){

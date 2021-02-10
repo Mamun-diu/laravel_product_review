@@ -123,4 +123,9 @@ class MainCategoryController extends Controller
         return view('frontend.index',compact('cat','product'));
     }
 
+    public static function mainCategory(){
+        $cat = Main_category::all();
+        return $cat;
+    }
+
 }

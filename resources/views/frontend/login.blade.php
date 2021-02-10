@@ -17,7 +17,7 @@
                 </div>
             @endif
             </div>
-            <div id="login" class=" login-before">
+            <div id="login" class="login-before">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title text-center border-bottom p-2">User Login</h5>

@@ -110,55 +110,108 @@
     box-shadow:none !important;
 }
 
+/* top index */
 
-/* Category */
 .top-index{
-    overflow: hidden;
-}
-.category{
+    background: url("../../cover/bg2.jpg") bottom;
+    background-size: cover;
+    width: 100vw;
+    height : 600px;
     position: relative;
-    width : 25%;
-    float : left;
 }
-.category .sub_category{
+.inner-top-index{
     position: absolute;
-    top: 0;
-    left: 218px;
-    width: 220px;
-    z-index: 10;
+    left : 0;
+    top : 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.category .tiny_category{
-    position: absolute;
-    top: 0;
-    left: 438px;
-    width: 220px;
-    z-index: 10;
+.middle-top-index{
+
 }
-.list-group-item {
-    padding: 4px 1rem !important;
+.middle-top-index h1{
+    color : #fff;
+    font-weight: bold;
+    font-size: 50px;
+    letter-spacing: 1;
+    margin-bottom: 10px;
+    text-align: center;
 }
-.slider{
-    margin-left : 1%;
-    width : 74%;
-    float : left;
+.middle-top-index form{
+    width: 60vw;
 }
-.carousel-caption{
-    margin-bottom: 25px !important;
+.middle-top-index input{
+    padding : 13px;
+    padding-left : 50px;
+    font-size: 20px;
 }
-.carousel-indicators li {
-    box-sizing: content-box;
-    flex: 0 1 auto;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 3px;
-    margin-left: 3px;
-    text-indent: -999px;
-    cursor: pointer;
-    background-color: rgb(255, 255, 255);
-    background-clip: padding-box;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    opacity: .5;
-    transition: opacity .6s ease;
+.middle-top-index button{
+    background: #80BA27;
+    color : #fff;
+    /* width : 100px; */
+    padding-left : 20px;
+    padding-right : 20px;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+.middle-top-index button:hover{
+    background: #66961f;
+    
+
+}
+.search{
+    position : relative;
+}
+.search img{
+    position : absolute;
+    left : 10px;
+    top : 10px;
+    height : 35px;
+    width : 35px;
+    z-index: 3;
+    user-select: none;
+
+}
+
+@media (max-width:1199px) {
+    .middle-top-index form{
+        width: 70vw;
+    }
+    .middle-top-index h1{
+        font-size: 45px;
+    }
+}
+@media (max-width:991px) {
+    .middle-top-index form{
+        width: 75vw;
+    }
+    .middle-top-index h1{
+        font-size: 40px;
+    }
+}
+@media (max-width:767px) {
+    .middle-top-index form{
+        width: 85vw;
+    }
+    .middle-top-index h1{
+        font-size: 35px;
+    }
+}
+@media (max-width:575px) {
+    .middle-top-index form{
+        width: 95vw;
+        margin-left : 2vw !important;
+        margin-right : 2vw !important;
+    }
+    .middle-top-index h1{
+        font-size: 30px;
+    }
+    .middle-top-index form button{
+        /* margin-left : 10px !important; */
+    }
 }
