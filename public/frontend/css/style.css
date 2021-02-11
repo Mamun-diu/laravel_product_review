@@ -178,12 +178,84 @@
 
 }
 
+/* Product Body */
+.product-body-full{
+    
+}
+.product-body-inner{
+    background : #eee;
+    border-radius: 5px;
+    min-height: 200px;
+}
+
+.card{
+    width: 16rem; 
+    height : 370px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+.card img{
+    width: 100%;
+}
+.card h5{
+    font-size : 20px;
+}
+.card p{
+    font-size: 18px;
+}
+.card:hover span{
+    display: block;
+}
+.card:hover{
+    transform: scale(1.03);
+}
+.card span{
+    display: none;
+    position : absolute;
+    height : 50px;
+    width: 50px;
+    background: transparent;
+}
+.card span:nth-of-type(1){
+    left : 0;
+    top : 0;
+    border-left : 2px solid blue;
+    border-top : 2px solid blue;
+}
+.card span:nth-of-type(2){
+    right : 0;
+    top : 0;
+    border-right : 2px solid blue;
+    border-top : 2px solid blue;
+}
+.card span:nth-of-type(3){
+    right : 0;
+    bottom : 0;
+    border-right : 2px solid blue;
+    border-bottom : 2px solid blue;
+}
+.card span:nth-of-type(4){
+    left : 0;
+    bottom : 0;
+    border-left : 2px solid blue;
+    border-bottom : 2px solid blue;
+}
 @media (max-width:1199px) {
     .middle-top-index form{
         width: 70vw;
     }
     .middle-top-index h1{
         font-size: 45px;
+    }
+    .card{
+        width: 15rem; 
+        height : 350px;
+    }
+    .card h5{
+        font-size : 18px;
+    }
+    .card p{
+        font-size: 16px;
     }
 }
 @media (max-width:991px) {
@@ -193,6 +265,16 @@
     .middle-top-index h1{
         font-size: 40px;
     }
+    .card{
+        width: 13rem; 
+        height : 310px;
+    }
+    .card h5{
+        font-size : 17px;
+    }
+    .card p{
+        font-size: 15px;
+    }
 }
 @media (max-width:767px) {
     .middle-top-index form{
@@ -200,6 +282,16 @@
     }
     .middle-top-index h1{
         font-size: 35px;
+    }
+    .card{
+        width: 9rem; 
+        height : 260px;
+    }
+    .card h5{
+        font-size : 14px;
+    }
+    .card p{
+        font-size: 13px;
     }
 }
 @media (max-width:575px) {
@@ -211,7 +303,15 @@
     .middle-top-index h1{
         font-size: 30px;
     }
-    .middle-top-index form button{
-        /* margin-left : 10px !important; */
+    .card{
+        width: 8rem; 
+        height : 250px;
     }
+    .card h5{
+        font-size : 13px;
+    }
+    .card p{
+        font-size: 12px;
+    }
+    
 }

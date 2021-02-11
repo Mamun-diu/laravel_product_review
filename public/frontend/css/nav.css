@@ -1,7 +1,7 @@
 *{
     margin:0;
     padding:0;
-    text-decoration: none;
+    text-decoration: none !important;
     list-style: none;
     outline: none;
     box-sizing: border-box;
@@ -38,33 +38,33 @@ body{
      transform: scale(1.2);
      color : #fff;
  }
- ul{
+ ul.main-cat{
     list-style: none;
     display: inline-block;
     margin : 0;
     position: relative;
  }
- ul li{
+ ul.main-cat li{
     padding : 13px;
     border-left : 1px solid #71A523;
     border-right : 1px solid #71A523;
  }
 
- ul li a{
+ ul.main-cat li a{
     
     text-decoration: none;
     color : #eee;
     font-size : 20px;
      letter-spacing: 1px;
  }
- ul li:hover,ul li a:hover{
+ ul.main-cat li:hover,ul li a:hover{
     background : #71A523;
     color : #fff;
 }
-ul li:hover ul.long-cat{
+ul.main-cat li:hover ul.long-cat{
     display: block;
 }
-ul ul.long-cat{
+ul.main-cat ul.long-cat{
     position:absolute;
     display: none;
     left: 32px;
@@ -74,11 +74,11 @@ ul ul.long-cat{
     z-index: 1000;
     padding : 0;
 }
-ul ul.long-cat li{
+ul.main-cat ul.long-cat li{
     border: none;
     padding  :0;
 }
-ul ul.long-cat li a{
+ul.main-cat ul.long-cat li a{
     color : #777;
     display: block;
     padding : 10px;
@@ -86,11 +86,11 @@ ul ul.long-cat li a{
     transition: all 1s;
     font-size : 16px;
 }
-ul ul.long-cat li:hover{
+ul.main-cat ul.long-cat li:hover{
     background : #E6E6E6;
     border-left : 4px solid #1a926e
 }
-ul ul.long-cat li a:hover{
+ul.main-cat ul.long-cat li a:hover{
     background : #E6E6E6;
     color : #000;
     margin-left : 10px;

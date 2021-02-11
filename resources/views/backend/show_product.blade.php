@@ -18,7 +18,7 @@
             @foreach($product as $data)
             <tr>
                 <td>{{ $data->id }}</td>
-                <td>{{ $data->name }}</td>
+                <td>{{  substr($data->name, 0, 30) }}{{(strlen($data->name) >30)?'....':''}}</td>
                 <td>{{ $data->brand }}</td>
                 <td><img width="50px" height="30px" src="{{ asset('public/images/'.$data->image) }}" alt=""></td>
                 <td style="padding:10px" class="d-flex justify-content-between align-items-center">
@@ -245,7 +245,7 @@
                             $('.description').html(data[1].details);
                             $('.price_table').html('');
                             data[2].forEach(element => {
-                                $('.price_table').append('<tr><td>'+element.website_name+'</td><td>'+element.price+'</td><td><a class="btn btn-sm btn-primary" href="'+element.link+'">Go</a></td></tr>')
+                                $('.price_table').append('<tr><td>'+element.website_name+'</td><td>'+element.price+'</td><td><a class="btn btn-sm btn-primary" target="_blank" href="'+element.link+'">Go</a></td></tr>')
 
                             });
 

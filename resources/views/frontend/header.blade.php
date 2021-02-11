@@ -7,7 +7,7 @@
 <header>
     <div class="container ">
         <a href="{{ URL::to('/') }}" class="company" for="">Review</a>
-        <ul>
+        <ul class="main-cat">
             <li class="float-start d-none d-lg-inline-block"><a href="">Category</a>
                 <ul class="long-cat">
                     @foreach($cat as $value)
@@ -31,7 +31,7 @@
             <i class="fas fa-bars"></i>
         </div>
 
-        <ul class="d-none d-lg-inline-block float-end like">
+        <ul class="d-none d-lg-inline-block float-end like main-cat">
             <li class="float-start pt-2" id="fav" ><a  href="{{ URL::to('user/favourite') }}" ><i data-bs-toggle="tooltip" title="Favourite" class="fas fa-heart" ></i></a></li>
             <li class="float-start pt-2"><a href="{{ URL::to('user/rated') }}"><i data-bs-toggle="tooltip" title="Rated" class="fas fa-star"></i></a></li>
             <!-- <li><a href="#">Home</a></li> -->

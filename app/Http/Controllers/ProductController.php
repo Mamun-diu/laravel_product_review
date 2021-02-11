@@ -212,4 +212,11 @@ class ProductController extends Controller
         return response()->json($data);
     }
 
+
+    public function productInfo($id){
+        $product = Product::find($id);
+        $price = Product::find($id)->prices;
+        return view('frontend.product_info',compact('product','price'));
+    }
+
 }

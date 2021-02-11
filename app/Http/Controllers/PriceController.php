@@ -132,4 +132,10 @@ class PriceController extends Controller
         return response()->json($allPrice);
         // return response()->json($price[0]);
     }
+
+
+    public static function getPrice($id){
+        $price = Price::where('product_id',$id)->first();
+        return $price;
+    }
 }
