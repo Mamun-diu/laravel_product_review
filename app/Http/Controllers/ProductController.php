@@ -7,7 +7,11 @@ use App\Models\Price;
 use App\Models\Main_category;
 use App\Models\Sub_category;
 use App\Models\Tiny_category;
+use App\Models\Favourite;
+use App\Models\Rating;
 use Illuminate\Http\Request;
+use Session;
+use DateTime;
 
 class ProductController extends Controller
 {
@@ -214,9 +218,21 @@ class ProductController extends Controller
 
 
     public function productInfo($id){
+        if(Session::has('user')){
+            $user_id = Session::get('user')['id'];
+        }else{
+            $user_id = 99999;
+        }
         $product = Product::find($id);
         $price = Product::find($id)->prices;
-        return view('frontend.product_info',compact('product','price'));
+        $favourite = Favourite::where('product_id',$id)->where('user_id',$user_id)->first();
+        $review = Rating::where('product_id',$id)->orderBy('id', 'desc')->with('user')->get();
+        $rating = Rating::where('product_id',$id)->avg('rate');
+        $rating_count = Rating::where('product_id',$id)->count();
+        // echo time_elapsed_string('2013-05-01 00:22:35');
+
+        // return response()->json();
+        return view('frontend.product_info',compact('product','price','favourite','review','rating','rating_count'));
     }
 
 }

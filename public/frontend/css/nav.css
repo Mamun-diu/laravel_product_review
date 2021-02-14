@@ -21,7 +21,7 @@ body{
      /* border-bottom : 2px solid red; */
      border-bottom : 2px solid #008616;
      /* margin-bottom : 50px; */
-     
+
  }
  header .company{
      font-family: tahoma;
@@ -51,7 +51,7 @@ body{
  }
 
  ul.main-cat li a{
-    
+
     text-decoration: none;
     color : #eee;
     font-size : 20px;
@@ -98,6 +98,9 @@ ul.main-cat ul.long-cat li a:hover{
 ul.like ul li{
     padding : 0 !important;
 }
+.dropdown-menu li a{
+    color : #444 !important;
+}
  #form{
     margin: 0px 20px;
     position: relative;
@@ -106,7 +109,7 @@ ul.like ul li{
  }
  #main_search{
     /* height: 40px; */
-    
+
 }
  #search{
     /* position: relative; */
@@ -116,9 +119,9 @@ ul.like ul li{
     outline: none;
     box-shadow: none;
     color: #111;
-    
+
     padding : 8px 40px  8px 30px;
-    
+
 }
 #search::placeholder{
     color : #888;
@@ -157,7 +160,7 @@ ul.like ul li{
 }
 
 .res-btn{
-    
+
 }
 .res-btn i{
     font-size: 28px;
@@ -242,13 +245,13 @@ ul.category{
     padding : 0;
     display: block;
     width: 100%;
-    
+
 }
 ul.category li{
     /* display: block; */
     border : none;
     padding: 0;
-    
+
 }
 ul.category li a{
     color : #777;
@@ -257,7 +260,7 @@ ul.category li a{
     padding-left : 18px;
     transition: all 1s;
     font-size : 16px;
-    
+
 }
 ul.category li:hover{
     background : #E6E6E6;

@@ -35,7 +35,14 @@ class RatingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id = $request->session()->get('user')['id'];
+        $rating = new Rating;
+        $rating->product_id = $request->product_id;
+        $rating->user_id = $user_id;
+        $rating->rate = $request->rating;
+        $rating->comment = $request->review;
+        $rating->save();
+        return Redirect()->back();
     }
 
     /**

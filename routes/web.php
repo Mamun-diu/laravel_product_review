@@ -27,6 +27,8 @@ use App\Http\Controllers\TinyCategoryController;
 
 Route::post('/login', [AdminController::class, 'login']);
 Route::post('/user/login', [UserController::class, 'checkLogin']);
+Route::post('/user/login/instant', [UserController::class, 'checkLoginInstant']);
+Route::post('/user/login/favourite', [UserController::class, 'checkLoginFavourite']);
 Route::post('/user/registration', [UserController::class, 'registration']);
 
 Route::get('/', [MainCategoryController::class, 'getMain']);
@@ -34,6 +36,9 @@ Route::get('/product/info/{id}', [ProductController::class, 'productInfo']);
 Route::get('/get/sub/category/{id}', [SubCategoryController::class, 'findSub']);
 
 Route::get('/get/tiny/category/{id}', [TinyCategoryController::class, 'findTiny']);
+
+Route::view('/product/filter','frontend.product_filter');
+
 
 
 Route::group(['middleware' => ['admin']], function () {
@@ -80,5 +85,9 @@ Route::group(['middleware' => ['user']], function () {
     Route::get('/login', [UserController::class, 'login']);
     Route::get('/logout', [UserController::class, 'logout']);
     Route::get('user/rated', [RatingController::class, 'index']);
+    Route::post('user/store/rating',[RatingController::class, 'store']);
     Route::get('user/favourite', [FavouriteController::class, 'index']);
+    Route::post('user/add/favourite',[FavouriteController::class, 'store']);
+    Route::delete('user/remove/favourite/{id}',[FavouriteController::class, 'destroy']);
+    Route::get('user/load/product/info/{id}',[ProductController::class, 'load']);
 });

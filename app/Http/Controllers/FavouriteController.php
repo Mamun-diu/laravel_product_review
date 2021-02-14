@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Favourite;
 use Illuminate\Http\Request;
+use Session;
 
 class FavouriteController extends Controller
 {
@@ -35,7 +36,12 @@ class FavouriteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user_id = Session::get('user')['id'];
+        $fav = new Favourite;
+        $fav->user_id = $user_id;
+        $fav->product_id = $request->product_id;
+        $fav->save();
+        return response()->json("Success");
     }
 
     /**
@@ -78,8 +84,10 @@ class FavouriteController extends Controller
      * @param  \App\Models\Favourite  $favourite
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Favourite $favourite)
+    public function destroy(Favourite $favourite, $id)
     {
-        //
+        $fav = Favourite::where('product_id',$id)->where('user_id',Session::get('user')['id']);
+        $fav->delete();
+        return response()->json("Successfully deleted");
     }
 }

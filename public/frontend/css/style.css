@@ -161,7 +161,7 @@
 }
 .middle-top-index button:hover{
     background: #66961f;
-    
+
 
 }
 .search{
@@ -180,7 +180,7 @@
 
 /* Product Body */
 .product-body-full{
-    
+
 }
 .product-body-inner{
     background : #eee;
@@ -188,58 +188,93 @@
     min-height: 200px;
 }
 
-.card{
-    width: 16rem; 
+.product-body-inner .card{
+    width: 16rem;
     height : 370px;
     position: relative;
     transition: all 0.3s ease;
 }
-.card img{
+.product-body-inner .card img{
     width: 100%;
 }
-.card h5{
+.product-body-inner .card h5{
     font-size : 20px;
 }
-.card p{
+.product-body-inner .card p{
     font-size: 18px;
 }
-.card:hover span{
+.product-body-inner .card:hover span{
     display: block;
 }
-.card:hover{
+.product-body-inner .card:hover{
     transform: scale(1.03);
 }
-.card span{
+.product-body-inner .card span{
     display: none;
     position : absolute;
     height : 50px;
     width: 50px;
     background: transparent;
 }
-.card span:nth-of-type(1){
+.product-body-inner .card span:nth-of-type(1){
     left : 0;
     top : 0;
     border-left : 2px solid blue;
     border-top : 2px solid blue;
 }
-.card span:nth-of-type(2){
+.product-body-inner .card span:nth-of-type(2){
     right : 0;
     top : 0;
     border-right : 2px solid blue;
     border-top : 2px solid blue;
 }
-.card span:nth-of-type(3){
+.product-body-inner .card span:nth-of-type(3){
     right : 0;
     bottom : 0;
     border-right : 2px solid blue;
     border-bottom : 2px solid blue;
 }
-.card span:nth-of-type(4){
+.product-body-inner .card span:nth-of-type(4){
     left : 0;
     bottom : 0;
     border-left : 2px solid blue;
     border-bottom : 2px solid blue;
 }
+
+#rating-form .review-rating{
+    position : relative;
+}
+#rating-form input[type='radio']{
+    margin-right: 10px;
+    margin-left : 13px;
+    margin-top : 10px;
+}
+#rating-form label.r:nth-of-type(1){
+    position : absolute;
+    left : 0;
+    /* top : 0; */
+}
+#rating-form label.r:nth-of-type(2){
+    position : absolute;
+    left : 8;
+    /* top : 0; */
+}
+#rating-form label.r:nth-of-type(3){
+    position : absolute;
+    left : 16;
+    /* top : 0; */
+}
+#rating-form label.r:nth-of-type(4){
+    position : absolute;
+    left : 24;
+    /* top : 0; */
+}
+#rating-form label.r:nth-of-type(5){
+    position : absolute;
+    left : 32;
+    /* top : 0; */
+}
+
 @media (max-width:1199px) {
     .middle-top-index form{
         width: 70vw;
@@ -247,14 +282,14 @@
     .middle-top-index h1{
         font-size: 45px;
     }
-    .card{
-        width: 15rem; 
+    .product-body-inner .card{
+        width: 15rem;
         height : 350px;
     }
-    .card h5{
+    .product-body-inner .card h5{
         font-size : 18px;
     }
-    .card p{
+    .product-body-inner .card p{
         font-size: 16px;
     }
 }
@@ -265,14 +300,14 @@
     .middle-top-index h1{
         font-size: 40px;
     }
-    .card{
-        width: 13rem; 
+    .product-body-inner .card{
+        width: 13rem;
         height : 310px;
     }
-    .card h5{
+    .product-body-inner .card h5{
         font-size : 17px;
     }
-    .card p{
+    .product-body-inner .card p{
         font-size: 15px;
     }
 }
@@ -283,14 +318,14 @@
     .middle-top-index h1{
         font-size: 35px;
     }
-    .card{
-        width: 9rem; 
+    .product-body-inner .card{
+        width: 9rem;
         height : 260px;
     }
-    .card h5{
+    .product-body-inner .card h5{
         font-size : 14px;
     }
-    .card p{
+    .product-body-inner .card p{
         font-size: 13px;
     }
 }
@@ -303,15 +338,15 @@
     .middle-top-index h1{
         font-size: 30px;
     }
-    .card{
-        width: 8rem; 
+    .product-body-inner .card{
+        width: 8rem;
         height : 250px;
     }
-    .card h5{
+    .product-body-inner .card h5{
         font-size : 13px;
     }
-    .card p{
+    .product-body-inner .card p{
         font-size: 12px;
     }
-    
+
 }
