@@ -192,20 +192,19 @@
                 $('.itembox').filter('.'+value).show('1000');
                 }
                 setTimeout(() => {
-                    var min = 99999999;
-                    var max = 0;
+                    var priceArray = [];
+                    var max;
+                    var min;
                     $('.product').each(function(){
                     var display =  $(this).css("display");
                     if(display!="none")
                     {
-                        if(min > $(this).find('.product-price').text()){
-                            min = $(this).find('.product-price').text();
-                        }
-                        if(max < $(this).find('.product-price').text()){
-                            max = $(this).find('.product-price').text();
-                        }
+                        priceArray.push( $(this).find('.product-price').text());
+                        
                     }
                     })
+                    max = Math.max(...priceArray);
+                    min = Math.min(...priceArray);
                     
                     $("#input-left").attr({
                         "max" : max,
@@ -234,20 +233,19 @@
                 $('.tinybox').filter('.'+value).show('1000');
                 }
                 setTimeout(() => {
-                    var min = 99999999;
-                    var max = 0;
+                    var priceArray = [];
+                    var max;
+                    var min;
                     $('.product').each(function(){
                     var display =  $(this).css("display");
                     if(display!="none")
                     {
-                        if(min > $(this).find('.product-price').text()){
-                            min = $(this).find('.product-price').text();
-                        }
-                        if(max < $(this).find('.product-price').text()){
-                            max = $(this).find('.product-price').text();
-                        }
+                        priceArray.push( $(this).find('.product-price').text());
+                        
                     }
                     })
+                    max = Math.max(...priceArray);
+                    min = Math.min(...priceArray);
                     
                     $("#input-left").attr({
                         "max" : max,
@@ -277,20 +275,19 @@
                 $('.brandbox').filter('.'+value).show('1000');
                 }
                 setTimeout(() => {
-                    var min = 99999999;
-                    var max = 0;
+                    var priceArray = [];
+                    var max;
+                    var min;
                     $('.product').each(function(){
                     var display =  $(this).css("display");
                     if(display!="none")
                     {
-                        if(min > $(this).find('.product-price').text()){
-                            min = $(this).find('.product-price').text();
-                        }
-                        if(max < $(this).find('.product-price').text()){
-                            max = $(this).find('.product-price').text();
-                        }
+                        priceArray.push( $(this).find('.product-price').text());
+                        
                     }
                     })
+                    max = Math.max(...priceArray);
+                    min = Math.min(...priceArray);
                     
                     $("#input-left").attr({
                         "max" : max,
