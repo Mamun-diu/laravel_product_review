@@ -37,7 +37,7 @@ Route::get('/get/sub/category/{id}', [SubCategoryController::class, 'findSub']);
 
 Route::get('/get/tiny/category/{id}', [TinyCategoryController::class, 'findTiny']);
 
-Route::view('/product/filter','frontend.product_filter');
+Route::get('/product/filter/{id}',[MainCategoryController::class, 'getAll']);
 
 
 

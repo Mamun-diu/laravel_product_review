@@ -122,6 +122,27 @@ class MainCategoryController extends Controller
         // return response()->json($product);
         return view('frontend.index',compact('cat','product'));
     }
+    public function getAll($id){
+        $subcat = Sub_category::where('main_category_id',$id)->get();
+        $tinycat = Tiny_category::where('main_category_id',$id)->with('subCategory')->get();
+        $product = Product::where('main_category_id',$id)->orderByRaw('id DESC')->with('price')->with('sub')->with('tiny')->paginate(30);
+        $min = Product::where('main_category_id',$id)->with('price')->get();
+        // $brand = Product::distinct()->where('main_category_id',$id)->with('sub')->with('tiny')->get();
+        $minNumber = 100000000000;
+        $maxNumber = 0;
+        foreach ($min as  $key => $value) {
+            if($minNumber > $value->price->price){
+                $minNumber = $value->price->price;
+            }
+            if($maxNumber < $value->price->price){
+                $maxNumber = $value->price->price;
+            }
+
+            // $data[$key] = $value->price->price;
+        }
+        // return response()->json($maxNumber);
+        return view('frontend.product_filter',compact('subcat','product','tinycat','minNumber','maxNumber'));
+    }
 
     public static function mainCategory(){
         $cat = Main_category::all();

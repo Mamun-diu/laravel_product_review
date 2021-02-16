@@ -11,7 +11,7 @@
             <li class="float-start d-none d-lg-inline-block"><a href="">Category</a>
                 <ul class="long-cat">
                     @foreach($cat as $value)
-                        <li data-main="{{ $value->id }}" class=""><a href="#">{{ $value->main_category }}</a></li>
+                        <li data-main="{{ $value->id }}" class=""><a href="{{ URL::to('/product/filter/') }}/{{ $value->id }}">{{ $value->main_category }}</a></li>
                     @endforeach
                 </ul>
             </li>
@@ -19,11 +19,11 @@
         <form id="form" class="d-none d-sm-inline-block mt-0" id="searchForm" action="" >
             <div id="main_search" class="input-group ">
                 <input id="search"  class="form-control" type="text" placeholder="What are you looking for?" autocomplete="off" name="search" value="" >
-    
+
                 <!--<button id="go" type="submit" class="input-group-text">Go</button> -->
-    
+
                 <i class="fas fa-search"></i>
-    
+
             </div>
         </form>
 
@@ -40,31 +40,31 @@
                 <button class="btn btn-outline-secondary dropdown-toggle setting" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i></button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="#">Profile</a></li>
-        
+
                     <li><hr class="dropdown-divider"></li>
-        
+
                     <li><a class="dropdown-item" href="{{ URL::to('/logout') }}">Logout</a></li>
                 </ul>
             @else
                 <li class="float-start pt-2"><a href="{{ URL::to('/login') }}">Login</a></li>
             @endif
         </ul>
-        
+
     </div>
 </header>
 <div class="res-menu">
-    
+
 </div>
 <div class="right-menu">
     <ul class="like">
         <form id="form" class="d-inline-block d-sm-none mt-0" id="searchForm" action="" >
             <div id="main_search" class="input-group ">
                 <input id="search"  class="form-control" type="text" placeholder="What are you looking for?" autocomplete="off" name="search" value="" >
-    
+
                 <!--<button id="go" type="submit" class="input-group-text">Go</button> -->
-    
+
                 <i class="fas fa-search"></i>
-    
+
             </div>
         </form>
         <li class="" id="fav" ><a class=""  href="{{ URL::to('user/favourite') }}" >View Your Favourite</a></li>
@@ -75,9 +75,9 @@
             <button class="btn btn-outline-secondary dropdown-toggle setting" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i></button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
-    
+
                 <li><hr class="dropdown-divider"></li>
-    
+
                 <li><a class="dropdown-item" href="{{ URL::to('/logout') }}">Logout</a></li>
             </ul>
         @else
@@ -88,7 +88,7 @@
     <h4 class="border-bottom p-2 mt-3">Category</h4>
     <ul class="category">
         @foreach($cat as $value)
-            <li data-main="{{ $value->id }}" class=""><a href="#">{{ $value->main_category }}</a></li>
+            <li data-main="{{ $value->id }}" class=""><a href="{{ URL::to('/product/filter/') }}/{{ $value->id }}">{{ $value->main_category }}</a></li>
         @endforeach
     </ul>
 </div>
@@ -124,6 +124,6 @@
             }
         }, 1);
     })
-    
+
 
 </script>
