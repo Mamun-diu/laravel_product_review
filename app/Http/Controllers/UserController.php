@@ -18,6 +18,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function index(){
+        $user_id = Session::get('user')['id'];
+        $user = User::find($user_id);
+        // return response()->json($user);
+        return view('frontend.profile')->with('user',$user);
+    }
     public function login()
     {
         return view('frontend.login');
@@ -80,7 +86,7 @@ class UserController extends Controller
                 $request->session()->forget('admin');
 
                 $user_id = $request->session()->get('user')['id'];
-                
+
                 $favourite = new Favourite;
                 $favourite->product_id = $request->favourite_product_id;
                 $favourite->user_id = $user_id;
@@ -144,9 +150,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return view('frontend.registration');
     }
 
     /**
@@ -169,7 +175,36 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validate = $request->validate([
+            'name' => ['required'],
+            'email' => 'required|unique:users,email,'.$id,
+            'phone' => 'required|unique:users,phone,'.$id,
+            'address' => ['required'],
+        ]);
+        if($validate){
+            $user = User::find($id);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->address = $request->address;
+            $user->save();
+            return Redirect()->back();
+        }
+    }
+    public function update_password(Request $request, $id){
+        $validate = $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|min:4',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+        $user_check = User::where('id',$id)->first();
+        if($user_check && Hash::check($request->old_password, $user_check->password)){
+            User::where('id',$id)->update(['password'=>Hash::make($request->new_password)]);
+            return Redirect()->back()->with('msg','Password Updated successfully');
+        }else{
+            return Redirect()->back()->with('error','Password Updated Failed');
+        }
+        return response()->json($user_check->password);
     }
 
     /**

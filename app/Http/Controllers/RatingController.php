@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rating;
+use App\Models\Product;
+use Session;
 use Illuminate\Http\Request;
 
 class RatingController extends Controller
@@ -14,7 +16,10 @@ class RatingController extends Controller
      */
     public function index()
     {
-        return view('frontend.rated');
+        $user_id = Session::get('user')->id;
+        $rate = Rating::where('user_id',$user_id)->groupBy('product_id')->with('product')->paginate(10);
+        // return response()->json($rate);
+        return view('frontend.rated')->with('product',$rate);
     }
 
     /**
@@ -42,6 +47,10 @@ class RatingController extends Controller
         $rating->rate = $request->rating;
         $rating->comment = $request->review;
         $rating->save();
+        Rating::where('product_id',$request->product_id)->where('user_id',$user_id)->update(['rate' => $request->rating]);
+
+
+
         return Redirect()->back();
     }
 

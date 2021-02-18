@@ -16,7 +16,8 @@
                 </ul>
             </li>
         </ul>
-        <form id="form" class="d-none d-sm-inline-block mt-0" id="searchForm" action="" >
+        <form id="form" class="d-none d-sm-inline-block mt-0 " id="searchForm" action="{{ URL::to('/search/result') }}" method="get" >
+            @csrf
             <div id="main_search" class="input-group ">
                 <input id="search"  class="form-control" type="text" placeholder="What are you looking for?" autocomplete="off" name="search" value="" >
 
@@ -26,6 +27,7 @@
 
             </div>
         </form>
+
 
         <div class="d-inline-block d-lg-none float-end m-2 res-btn">
             <i class="fas fa-bars"></i>
@@ -39,7 +41,7 @@
                 <li class="float-start pt-2"><a href="#">{{ Session::get('user.name', 'default') }}</a></li>
                 <button class="btn btn-outline-secondary dropdown-toggle setting" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i></button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="{{ URL::to('/user/profile') }}">Profile</a></li>
 
                     <li><hr class="dropdown-divider"></li>
 
@@ -57,7 +59,8 @@
 </div>
 <div class="right-menu">
     <ul class="like">
-        <form id="form" class="d-inline-block d-sm-none mt-0" id="searchForm" action="" >
+        <form id="form" class="d-inline-block d-sm-none mt-0" id="searchForm" action="{{ URL::to('/search/result') }}" method="get" >
+            @csrf
             <div id="main_search" class="input-group ">
                 <input id="search"  class="form-control" type="text" placeholder="What are you looking for?" autocomplete="off" name="search" value="" >
 
@@ -74,7 +77,7 @@
             <li class=""><a href="#">{{ Session::get('user.name', 'default') }}</a></li>
             <button class="btn btn-outline-secondary dropdown-toggle setting" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i></button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="{{ URL::to('/user/profile') }}">Profile</a></li>
 
                 <li><hr class="dropdown-divider"></li>
 
@@ -92,7 +95,9 @@
         @endforeach
     </ul>
 </div>
+
 <script>
+
     let res_btn = document.querySelector('.res-btn i');
     let res_menu = document.querySelector('.res-menu');
     let right_menu = document.querySelector('.right-menu');

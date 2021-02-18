@@ -3,17 +3,17 @@
 @section('content')
 <div class="product-body-full p-3 ">
     <div class="container ">
-        <h2 class="display-4 text-center text-muted">Your Favourite Item</h2>
+        <h2 class="display-4 text-center text-muted">Search Result</h2>
         <div class="product-body-inner p-2 d-flex flex-wrap justify-content-center">
-            @if(!empty($product[0]->product_id))
+            @if(!empty($product[0]->name))
                 @foreach($product as $item)
-                <a href="{{  URL::to('/product/info') }}/{{ $item->product->id }} " class="text-decoration-none">
+                <a href="{{  URL::to('/product/info') }}/{{ $item->id }} " class="text-decoration-none">
                     <div class="card product-index m-1 shadow" style="">
-                        <img height="250px" src="{{ asset('public/images/') }}/{{ $item->product->image }}" class="card-img-top" alt="image">
+                        <img height="250px" src="{{ asset('public/images/') }}/{{ $item->image }}" class="card-img-top" alt="image">
                         <div class="card-body">
-                        <h5 class="text-primary fw-bold">{{  substr($item->product->name, 0, 30) }} {{(strlen($item->product->name) >30)?'....':''}}</h5>
+                        <h5 class="text-primary fw-bold">{{  substr($item->name, 0, 30) }} {{(strlen($item->name) >30)?'....':''}}</h5>
 
-                        <p>Price : {{ $item->product->price['price'] }}tk</p>
+                        <p>Price : {{ $item->price['price'] }}tk</p>
                         </div>
                         <span></span>
                         <span></span>
@@ -24,7 +24,7 @@
                 @endforeach
 
             @else
-                <h1 class="alert alert-danger">Sorry! No item available.</h1>
+                <h1 class="alert alert-danger">Sorry! Result not found.</h1>
             @endif
 
         </div>

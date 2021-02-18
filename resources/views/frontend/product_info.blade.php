@@ -45,12 +45,14 @@ function time_elapsed_string($datetime, $full = false) {
         </div>
         <div class="container my-2">
             <div class="row">
-                <div class="col-md-4  border">
+                <div style="position : relative;" class="col-md-4  border">
                     <img width="100%" src="{{ asset('public/images/') }}/{{ $product->image }}" alt="">
+                    <p style="background : rgb(119, 8, 245);color : #eee; margin-bottom : 0; padding:5px 10px;display: inline-block;position : absolute;right : 0;top : 0;">{{ $product->brand }}</p>
                 </div>
                 <div class="offset-lg-1 col-md-6">
                     <h4 class="text-secondary lh-base">{{ $product->name }}</h4>
-                    <div class="product-rating my-3 d-flex">
+
+                    <div class="product-rating mt-3 mb-1 d-flex ">
                         <?php $mod = (double)$rating-(int)$rating; ?>
                         @for($i = 1; $i <= 5; $i++)
 
@@ -65,6 +67,9 @@ function time_elapsed_string($datetime, $full = false) {
                         @endfor
 
                         <h3 class="rating-count">({{ $rating_count }})</h3>
+                    </div>
+                    <div class="d-flex justify-content-left mt-n2 align-items-center mb-2">
+                        <i class="fas fa-heart fa-2x me-2 mt-n1 text-primary"></i><h2 class=""> ({{ $fav_count }})</h2>
                     </div>
                     <div class="favourite">
                         @if(Session::has('user'))
@@ -211,7 +216,7 @@ function time_elapsed_string($datetime, $full = false) {
 
             </div>
             <div class="modal-footer">
-                <a style=""  href="{{ URL::to('/login') }}">I have no account</a>
+                <a style=""  href="{{ URL::to('/user/registration') }}">I have no account</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Login</button>
 
@@ -248,7 +253,7 @@ function time_elapsed_string($datetime, $full = false) {
 
             </div>
             <div class="modal-footer">
-            <a style=""  href="{{ URL::to('/login') }}">I have no account</a>
+            <a style=""  href="{{ URL::to('/user/registration') }}">I have no account</a>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Login</button>
             </div>

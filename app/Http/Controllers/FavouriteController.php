@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Favourite;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Session;
 
@@ -15,7 +16,10 @@ class FavouriteController extends Controller
      */
     public function index()
     {
-        return view('frontend.favourite');
+        $user_id = Session::get('user')->id;
+        $fav = Favourite::where('user_id',$user_id)->with('product')->paginate(10);
+        // return response()->json($fav);
+        return view('frontend.favourite')->with('product',$fav);
     }
 
     /**

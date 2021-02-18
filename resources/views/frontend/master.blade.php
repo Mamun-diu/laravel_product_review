@@ -18,9 +18,32 @@
     {{-- <link rel="stylesheet" href="/resources/demos/style.css"> --}}
 
     <title>Product Review</title>
+    <style>
+        .toastr{
+            position : absolute;
+            right : 10px;
+            top : 65px;
+        }
+    </style>
   </head>
   <body>
     {{ view('frontend/header') }}
+    <?php
+        $msg = Session::get('msg');
+        $error = Session::get('error');
+    ?>
+    @if($msg)
+        <div class="toastr alert alert-success">
+            {{ $msg }}
+        </div>
+    @endif
+    @if($error)
+        <div class="toastr alert alert-danger">
+            {{ $error }}
+        </div>
+    @endif
+    <span class="toastr"></span>
+    <span class="alert-danger"></span>
     <div style="min-height:500px">
         @yield('content')
     </div>
@@ -34,7 +57,14 @@
             src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
             integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="
             crossorigin="anonymous"></script>
-  
+    <script>
+         $(document).ready(function(){
+                setTimeout(() => {
+                  $('.toastr').hide();
+                  $('.alert-danger').hide();
+                }, 2500);
+            })
+    </script>
 
   </body>
 </html>

@@ -226,13 +226,32 @@ class ProductController extends Controller
         $product = Product::find($id);
         $price = Product::find($id)->prices;
         $favourite = Favourite::where('product_id',$id)->where('user_id',$user_id)->first();
+        $fav_count = Favourite::where('product_id',$id)->count();
+        // return response()->json($fav_count);
         $review = Rating::where('product_id',$id)->orderBy('id', 'desc')->with('user')->get();
-        $rating = Rating::where('product_id',$id)->avg('rate');
-        $rating_count = Rating::where('product_id',$id)->count();
+        $rating = Rating::where('product_id',$id)->groupBy('user_id')->get()->avg('rate');
+        $rating_count = Rating::where('product_id',$id)->groupBy('user_id')->count();
         // echo time_elapsed_string('2013-05-01 00:22:35');
 
         // return response()->json();
-        return view('frontend.product_info',compact('product','price','favourite','review','rating','rating_count'));
+        return view('frontend.product_info',compact('product','price','favourite','review','rating','rating_count','fav_count'));
+    }
+
+    function searchTop($id){
+        // return response()->json($id);
+        if($id==''){
+            return response()->json('');
+        }
+        $result = Product::where('name','like',"%{$id}%")->skip(0)->take(5)->get();
+        return response()->json($result);
+    }
+    function searchResult(Request $request){
+
+        $name = $request->search;
+
+        $product = Product::where('name','like',"%{$name}%")->paginate(12);
+        // return response()->json($product[0]->name);
+        return view('frontend.search')->with('product',$product);
     }
 
 }

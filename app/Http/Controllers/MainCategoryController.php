@@ -118,7 +118,7 @@ class MainCategoryController extends Controller
     }
     public function getMain(){
         $cat = Main_category::all();
-        $product = Product::orderByRaw('id DESC')->with('price')->get();
+        $product = Product::orderByRaw('id DESC')->with('price')->paginate(12);
         // return response()->json($product);
         return view('frontend.index',compact('cat','product'));
     }

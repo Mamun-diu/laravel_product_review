@@ -30,6 +30,7 @@ Route::post('/user/login', [UserController::class, 'checkLogin']);
 Route::post('/user/login/instant', [UserController::class, 'checkLoginInstant']);
 Route::post('/user/login/favourite', [UserController::class, 'checkLoginFavourite']);
 Route::post('/user/registration', [UserController::class, 'registration']);
+Route::get('/user/registration',[UserController::class, 'show']);
 
 Route::get('/', [MainCategoryController::class, 'getMain']);
 Route::get('/product/info/{id}', [ProductController::class, 'productInfo']);
@@ -38,6 +39,8 @@ Route::get('/get/sub/category/{id}', [SubCategoryController::class, 'findSub']);
 Route::get('/get/tiny/category/{id}', [TinyCategoryController::class, 'findTiny']);
 
 Route::get('/product/filter/{id}',[MainCategoryController::class, 'getAll']);
+Route::get('/product/search/{id}', [ProductController::class, 'searchTop']);
+Route::get('/search/result', [ProductController::class, 'searchResult']);
 
 
 
@@ -90,4 +93,7 @@ Route::group(['middleware' => ['user']], function () {
     Route::post('user/add/favourite',[FavouriteController::class, 'store']);
     Route::delete('user/remove/favourite/{id}',[FavouriteController::class, 'destroy']);
     Route::get('user/load/product/info/{id}',[ProductController::class, 'load']);
+    Route::get('user/profile',[UserController::class, 'index']);
+    Route::post('/user/edit/profile/{id}',[UserController::class,'update']);
+    Route::post('/user/change/password/{id}',[UserController::class, 'update_password']);
 });
