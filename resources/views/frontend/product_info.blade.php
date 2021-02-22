@@ -244,12 +244,12 @@ function time_elapsed_string($datetime, $full = false) {
                 <input type="hidden" name="instant_review" value="">
                 <input type="hidden" name="instant_rating" value="">
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control mt-1" name="email" placeholder="Enter Email Address...">
+                    <label for="emailR">Email</label>
+                    <input id="emailR" type="email" class="form-control mt-1" name="email" placeholder="Enter Email Address...">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input id="password" type="password" class="form-control mt-1" name="password" placeholder="Enter Password...">
+                    <label for="passwordR">Password</label>
+                    <input id="passwordR" type="password" class="form-control mt-1" name="password" placeholder="Enter Password...">
                 </div>
 
             </div>

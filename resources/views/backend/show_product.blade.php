@@ -33,7 +33,7 @@
                 <td>
                     <button class="btn btn-sm btn-primary show-item" data-bs-toggle="modal" data-bs-target="#show-product" data-id="{{ $data->id }}" >Show</button>
                     <a class="btn btn-sm btn-info" href="{{ URL::to('/admin/edit/product/') }}/{{ $data->id }}" >Edit</a>
-                    <button class="btn btn-sm btn-danger" >Delete</button>
+                    <button class="btn btn-sm btn-danger product-delete" data-id="{{ $data->id }}" data-bs-toggle="modal" data-bs-target="#product-delete" >Delete</button>
                 </td>
             </tr>
             @endforeach
@@ -46,7 +46,32 @@
 {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     Launch static backdrop modal
   </button> --}}
+  
+  {{-- Delete Product --}}
+  <div class="modal fade" id="product-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Confirm</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{{ URL::to('/admin/remove/product') }}" method="post">
+            @csrf
+            <div class="modal-body">
+                <input type="hidden" name="id" value="">
+                <h1 class="display-3 text-danger my-3 text-center">Are you sure?</h1>
 
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger">Yes</button>
+
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <!-- Category -->
   <div class="modal fade" id="category" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -276,7 +301,7 @@
                 '<tr><td colspan="3"><button id="update_p" type="submit" class="btn btn-primary float-end">Update</button></td>'+
                 '</tr></form>';
                 $('.price_table').html(create_html);
-                
+
 
             })
 
@@ -325,6 +350,11 @@
 
             });
 
+            $('.product-delete').click(function(){
+                var id = $(this).data('id');
+                $('#product-delete input[name="id"]').val(id);
+
+            })
 
 
           })

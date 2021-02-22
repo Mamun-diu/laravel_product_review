@@ -24,6 +24,13 @@ use App\Http\Controllers\TinyCategoryController;
 
 // Route::view('/', 'frontend.index');
 
+Route::get('/clear/cache',function(){
+    Artisan::call('cache:clear');
+    Artisan::call('route:cache');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    dd('cache clear');
+ });
 
 Route::post('/login', [AdminController::class, 'login']);
 Route::post('/user/login', [UserController::class, 'checkLogin']);
@@ -81,6 +88,8 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin/add/price', [PriceController::class, 'index']);
     Route::post('/admin/update/price', [PriceController::class, 'updatePrice']);
     Route::get('/admin/find/price_table/{id}', [PriceController::class, 'findPrice']);
+
+    Route::post('/admin/remove/product',[ProductController::class,'removeProduct']);
 
 
 });

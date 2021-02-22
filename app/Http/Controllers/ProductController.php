@@ -12,6 +12,7 @@ use App\Models\Rating;
 use Illuminate\Http\Request;
 use Session;
 use DateTime;
+use Hash;
 
 class ProductController extends Controller
 {
@@ -211,7 +212,7 @@ class ProductController extends Controller
         $tiny = Product::find($id)->tiny->tiny_category;
         $cat = [$main,$sub,$tiny];
         $product = Product::find($id);
-        $price = Product::find($id)->price;
+        $price = Product::find($id)->prices;
         $data = [$cat,$product,$price];
         return response()->json($data);
     }
@@ -252,6 +253,20 @@ class ProductController extends Controller
         $product = Product::where('name','like',"%{$name}%")->paginate(12);
         // return response()->json($product[0]->name);
         return view('frontend.search')->with('product',$product);
+    }
+
+    public function removeProduct(Request $request){
+        // return response()->json(Hash::make('adminmamun'));
+        // Product, Price, Favourite, Rating
+        $id = $request->id;
+        $image = Product::find($id);
+        // return response()->json($image->image);
+        $product = Product::where('id',$id)->delete();
+        $price = Price::where('product_id',$id)->delete();
+        $favourite = Favourite::where('product_id',$id)->delete();
+        $rating = Rating::where('product_id',$id)->delete();
+        unlink(public_path('images/'.$image->image));
+        return Redirect()->back()->with('msg','Product Deleted Successfully');
     }
 
 }
