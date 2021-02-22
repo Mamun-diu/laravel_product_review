@@ -1,9 +1,9 @@
 @extends('frontend/master')
 
 @section('content')
-    <div class="full-width">
-        <div class="top-index">
-            <div class="inner-top-index">
+    <div class="full-width" >
+        <div class="top-index particles-js" id="particles-js">
+            <div class="inner-top-index ">
                 <div class="middle-top-index">
                     <h1>Find Your Dream Product</h1>
                     <form class="m-0 searchDiv" action="">
@@ -26,8 +26,69 @@
         </div>
     </div>
     <div class="product-body-full p-3 ">
+        <div class="top-rated">
+            <div class="container">
+                <div class="row">
+                    <h2 class="display-4 text-center text-muted">Top Rated</h2>
+                    <div class="product-body-inner-rate p-2">
+                        <div class="owlCarousel owl-carousel d-flex justify-content-center align-items-center">
+                            @foreach($top_rated as $item)
+                            <a href="{{  URL::to('/product/info') }}/{{ $item->product->id }} " class="text-decoration-none">
+                                <div class="card product-index m-1 shadow" style="position: relative;">
+                                    <img height="250px" src="{{ asset('public/images/') }}/{{ $item->product->image }}" class="card-img-top" alt="image">
+                                    <div class="card-body">
+                                    <h5 class="text-primary fw-bold">{{  substr($item->product->name, 0, 25) }} {{(strlen($item->product->name) >25)?'....':''}}</h5>
+
+                                    <p>Price : {{ $item->price['price'] }}tk &nbsp; </p>
+                                    </div>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <div style="position: absolute; top:0;right:0">
+                                        <h4 style="background : blue; padding:5px 10px;color:white;"> {{ substr($item->avg,0,3) }} <i class="fas fa-star"></i></h4>
+                                    </div>
+                                </div>
+                            </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="top-rated">
+            <div class="container">
+                <div class="row">
+                    <h2 class="display-4 text-center text-muted mt-5">High Choice</h2>
+                    <div class="product-body-inner-rate p-2">
+                        <div class="owlCarousel owl-carousel d-flex justify-content-center align-items-center">
+                            @foreach($fav as $item)
+                            <a href="{{  URL::to('/product/info') }}/{{ $item->product->id }} " class="text-decoration-none">
+                                <div class="card product-index m-1 shadow" style="position: relative;">
+                                    <img height="250px" src="{{ asset('public/images/') }}/{{ $item->product->image }}" class="card-img-top" alt="image">
+                                    <div class="card-body">
+                                    <h5 class="text-primary fw-bold">{{  substr($item->product->name, 0, 25) }} {{(strlen($item->product->name) >25)?'....':''}}</h5>
+
+                                    <p>Price : {{ $item->price['price'] }}tk </p>
+                                    </div>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <div style="position: absolute; top:0;right:0">
+                                        <h4 style="background : rgb(255, 102, 0); padding:5px 10px;color:white;"><i class="fas fa-heart"></i> {{ $item->count }} </h4>
+                                    </div>
+                                </div>
+                            </a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container ">
-            <h2 class="display-4 text-center text-muted">All Product</h2>
+            <h2 class="display-4 text-center text-muted mt-4">New Item</h2>
             <div class="product-body-inner p-2 d-flex flex-wrap justify-content-center">
                 @foreach($product as $item)
                 <a href="{{  URL::to('/product/info') }}/{{ $item->id }} " class="text-decoration-none">
@@ -52,10 +113,56 @@
     <div class="d-flex justify-content-center align-items-center bg-secondary">
         <div style="max-height: 45px; margin-top: 8px;">{{ $product->links() }}</div>
     </div>
-
+    <script src="{{ asset('/public/frontend/js/particles.js') }}"></script>
+    <script src="{{ asset('/public/frontend/js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function(){
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            // margin:10,
+            nav:true,
+            autoplay:true,
+            autoplayTimeout:2000,
+            autoplayHoverPause:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                300:{
+                    items:2
+                },
+                440:{
+                    items:3
+                },
+                576:{
+                    items:3
+                },
+                768:{
+                    items:3
+                },
+                992:{
+                    items:4
+                },
+                1200:{
+                    items:5
+                }
+            }
+        })
+        // $("#product-slider").owlCarousel({
+        //     items:4,
+        //     itemsDesktop:[1199,2],
+        //     itemsDesktopSmall:[980,2],
+        //     itemsMobile:[700,1],
+        //     pagination:false,
+        //     navigation:true,
+        //     navigationText:["",""],
+        //     autoPlay:true
+        // })
+
+
+
         $(".body-search input[name='search']").keyup(function(){
             var search = $(this).val();
             if(search != ''){

@@ -6,6 +6,8 @@ use App\Models\Main_category;
 use App\Models\Sub_category;
 use App\Models\Tiny_category;
 use App\Models\Product;
+use App\Models\Rating;
+use App\Models\Favourite;
 use Illuminate\Http\Request;
 use DB;
 
@@ -119,8 +121,10 @@ class MainCategoryController extends Controller
     public function getMain(){
         $cat = Main_category::all();
         $product = Product::orderByRaw('id DESC')->with('price')->paginate(12);
-        // return response()->json($product);
-        return view('frontend.index',compact('cat','product'));
+        $top_rated = Rating::selectRaw('product_id, AVG(rate) as avg')->groupBy('product_id')->orderBy('rate','Desc')->skip(0)->take(10)->with('price')->with('product')->get();
+        $fav = Favourite::selectRaw('product_id, COUNT(user_id) as count')->groupBy('product_id')->orderBy('count','DESC')->skip(0)->take(10)->with('product')->with('price')->get();
+        // return response()->json($fav);
+        return view('frontend.index',compact('cat','product','top_rated','fav'));
     }
     public function getAll($id){
         $subcat = Sub_category::where('main_category_id',$id)->get();

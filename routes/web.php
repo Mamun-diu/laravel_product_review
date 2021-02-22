@@ -94,6 +94,16 @@ Route::group(['middleware' => ['user']], function () {
     Route::delete('user/remove/favourite/{id}',[FavouriteController::class, 'destroy']);
     Route::get('user/load/product/info/{id}',[ProductController::class, 'load']);
     Route::get('user/profile',[UserController::class, 'index']);
-    Route::post('/user/edit/profile/{id}',[UserController::class,'update']);
+    // Route::post('/user/edit/profile/{id}',[UserController::class,'update']);
     Route::post('/user/change/password/{id}',[UserController::class, 'update_password']);
+
+
+    Route::post('/user/change/fullname/{id}',[UserController::class, 'update_fullname']);
+    Route::post('/user/change/username/{id}',[UserController::class, 'update_username']);
+    Route::post('/user/change/email/{id}',[UserController::class, 'update_email']);
+    Route::post('/user/change/phone/{id}',[UserController::class, 'update_phone']);
+    Route::post('/user/change/gender/{id}',[UserController::class, 'update_gender']);
+    Route::post('/user/change/address/{id}',[UserController::class, 'update_address']);
+    Route::post('/user/change/image/{id}',[UserController::class, 'update_image']);
+    Route::post('/user/remove/account/{id}',[UserController::class, 'remove_account']);
 });

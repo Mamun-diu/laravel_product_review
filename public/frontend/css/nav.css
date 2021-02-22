@@ -101,12 +101,13 @@ ul.like ul li{
 .dropdown-menu li a{
     color : #444 !important;
 }
- #form{
+ #form,#formR{
     margin: 0px 20px;
     position: relative;
     width : 350px;
     top: -23px;
  }
+
  #main_search{
     /* height: 40px; */
 
@@ -127,6 +128,28 @@ ul.like ul li{
     color : #888;
 }
 #search:focus{
+    box-shadow: inset 0 0.0625rem 0.0625rem rgb(0 0 0 / 10%), 0 0 0 0.2rem rgb(0 149 255 / 25%);
+}
+#main_searchR{
+    /* height: 40px; */
+
+}
+ #searchR{
+    /* position: relative; */
+    background: #ffffff;
+    border: 1px solid #66951F !important;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: none;
+    color: #111;
+
+    padding : 8px 40px  8px 30px;
+
+}
+#searchR::placeholder{
+    color : #888;
+}
+#searchR:focus{
     box-shadow: inset 0 0.0625rem 0.0625rem rgb(0 0 0 / 10%), 0 0 0 0.2rem rgb(0 149 255 / 25%);
 }
 .fa-search{
@@ -229,7 +252,7 @@ ul.like li{
     position: absolute;
     color: #cbff7c;
     right: 5px;
-    top: 114px;
+    top: -2px;
 }
 .right-menu ul.like ul li{
     padding: 0 !important;
@@ -273,18 +296,18 @@ ul.category li a:hover{
 }
 
 @media (max-width:991px) {
-    #form{
+    #form,#formR{
       top : 7px;
       width : 480px;
     }
 }
 @media (max-width:767px) {
-    #form{
+    #form,#formR{
       width : 300px;
     }
 }
 @media (max-width:575px) {
-    #form{
+    #form,#formR{
         width : 96%;
         margin : 5px;
         margin-bottom: 15px;

@@ -5,7 +5,7 @@
     // die();
 ?>
 <header>
-    <div class="container ">
+    <div class="containe px-3">
         <a href="{{ URL::to('/') }}" class="company" for="">Review</a>
         <ul class="main-cat">
             <li class="float-start d-none d-lg-inline-block"><a href="">Category</a>
@@ -38,7 +38,7 @@
             <li class="float-start pt-2"><a href="{{ URL::to('user/rated') }}"><i data-bs-toggle="tooltip" title="Rated" class="fas fa-star"></i></a></li>
             <!-- <li><a href="#">Home</a></li> -->
             @if(Session::has('user'))
-                <li class="float-start pt-2"><a href="#">{{ Session::get('user.name', 'default') }}</a></li>
+                <li class="float-start pt-2"><a href="#">{{ Session::get('user.fname', 'default') }}</a></li>
                 <button class="btn btn-outline-secondary dropdown-toggle setting" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i></button>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{{ URL::to('/user/profile') }}">Profile</a></li>
@@ -59,10 +59,10 @@
 </div>
 <div class="right-menu">
     <ul class="like">
-        <form id="form" class="d-inline-block d-sm-none mt-0" id="searchForm" action="{{ URL::to('/search/result') }}" method="get" >
+        <form id="formR" class="d-inline-block d-sm-none mt-0" id="searchForm" action="{{ URL::to('/search/result') }}" method="get" >
             @csrf
-            <div id="main_search" class="input-group ">
-                <input id="search"  class="form-control" type="text" placeholder="What are you looking for?" autocomplete="off" name="search" value="" >
+            <div id="main_searchR" class="input-group ">
+                <input id="searchR"  class="form-control" type="text" placeholder="What are you looking for?" autocomplete="off" name="search" value="" >
 
                 <!--<button id="go" type="submit" class="input-group-text">Go</button> -->
 
@@ -74,15 +74,18 @@
         <li class=""><a class="" href="{{ URL::to('user/rated') }}">View Your Rated</a></li>
         <!-- <li><a href="#">Home</a></li> -->
         @if(Session::has('user'))
-            <li class=""><a href="#">{{ Session::get('user.name', 'default') }}</a></li>
-            <button class="btn btn-outline-secondary dropdown-toggle setting" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i></button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="{{ URL::to('/user/profile') }}">Profile</a></li>
+            <div style="position : relative">
+                <li><a href="#">{{ Session::get('user.fname', 'default') }}</a></li>
+                <button class="btn btn-outline-secondary dropdown-toggle setting" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i></button>
 
-                <li><hr class="dropdown-divider"></li>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{ URL::to('/user/profile') }}">Profile</a></li>
 
-                <li><a class="dropdown-item" href="{{ URL::to('/logout') }}">Logout</a></li>
-            </ul>
+                    <li><hr class="dropdown-divider"></li>
+
+                    <li><a class="dropdown-item" href="{{ URL::to('/logout') }}">Logout</a></li>
+                </ul>
+            </div>
         @else
             <li class=""><a href="{{ URL::to('/login') }}">Login</a></li>
         @endif

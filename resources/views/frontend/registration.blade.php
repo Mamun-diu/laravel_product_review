@@ -1,24 +1,8 @@
 @extends('frontend/master')
 
 @section('content')
-    <div class="full-body">
+    {{-- <div class="full-body">
         <div class="container ">
-            {{-- <div class="error" style="width:30%; margin:0 auto">
-                @if(session('msg'))
-                <div class="alert alert-danger">{{ session('msg') }}</div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            </div> --}}
-
-
             <div class="row">
                 <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                     <div id="register" class="register-before">
@@ -55,48 +39,99 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+    <div class="full-body">
+        <div class="containerR shadow">
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            <div class="title">Registration</div>
+            <div class="content">
+
+            <form id="reg" action="{{ URL::to('/user/registration') }}" method="post">
+                @csrf
+                <div class="user-details">
+                  <div class="input-box">
+                    <span class="details">First Name</span>
+                    <input type="text" placeholder="Enter your name" name="fname">
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Last Name</span>
+                    <input type="text" placeholder="Enter your name" name="lname">
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Username</span>
+                    <input type="text" placeholder="Enter your username" name="username">
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="text" placeholder="Enter your email" name="email">
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Phone Number</span>
+                    <input type="text" placeholder="Enter your number" name="phone">
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Address</span>
+                    <input type="text" name="address" placeholder="Enter your Address">
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Password</span>
+                    <input type="password" placeholder="Enter your password" name="password">
+                  </div>
+                  <div class="input-box">
+                    <span class="details">Confirm Password</span>
+                    <input type="password" placeholder="Confirm your password" name="re_password">
+                  </div>
+                </div>
+                <div class="gender-details">
+                  <input type="radio" name="gender" id="dot-1" value="male" checked>
+                  <input type="radio" name="gender" id="dot-2" value="female">
+                  <input type="radio" name="gender" id="dot-3" value="unknown">
+                  <span class="gender-title">Gender</span>
+                  <div class="category">
+                    <label for="dot-1">
+                    <span class="dot one"></span>
+                    <span class="gender">Male</span>
+                  </label>
+                  <label for="dot-2">
+                    <span class="dot two"></span>
+                    <span class="gender">Female</span>
+                  </label>
+                  <label for="dot-3">
+                    <span class="dot three"></span>
+                    <span class="gender">Prefer not to say</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="button">
+                  <input type="submit" value="Register">
+                </div>
+              </form>
+            </div>
+          </div>
     </div>
 
     <script>
-        // let login = document.getElementById('login');
-        // let register = document.getElementById('register');
-        // let no_account = document.querySelector('.no-account');
-        // let have_account = document.querySelector('.have-account');
-        // let name = document.getElementById('name');
-        // name.style.backgroundColor = "red !important";
-        // no_account.addEventListener('click',function(){
-        //     login.classList.add('login');
-        //     register.classList.add('register');
 
-        //     register.classList.add('register-before');
-        //     login.classList.add('login-before');
-
-        //     login.classList.remove('alogin');
-        //     register.classList.remove('aregister');
-
-
-        // })
-        // have_account.addEventListener('click',function(){
-        //     login.classList.remove('login');
-        //     register.classList.remove('register');
-        //     register.classList.remove('register-before');
-        //     register.classList.remove('login-before');
-
-        //     login.classList.add('alogin');
-        //     register.classList.add('aregister');
-
-        // })
-        // setTimeout(() => {
-        //     document.querySelector('.error').innerHTML = '';
-        // }, 2000);
         let reg = document.getElementById('reg');
         reg.addEventListener('submit',function(e){
-            let name = document.getElementById('name');
-            let email = document.querySelector('#register input[name="email"]');
-            let phone = document.querySelector('#register input[name="phone"]');
-            let password = document.querySelector('#register input[name="password"]');
-            let re_password = document.querySelector('#register input[name="re_password"]');
-            let address = document.querySelector('#register textarea[name="address"]');
+            // e.preventDefault();
+            let fname = document.querySelector('#reg input[name="fname"]');
+            let lname = document.querySelector('#reg input[name="lname"]');
+            let email = document.querySelector('#reg input[name="email"]');
+            let phone = document.querySelector('#reg input[name="phone"]');
+            let password = document.querySelector('#reg input[name="password"]');
+            let re_password = document.querySelector('#reg input[name="re_password"]');
+            let username = document.querySelector('#reg input[name="username"]');
+            let address = document.querySelector('#reg input[name="address"]');
+            console.log(name);
 
             function validate(values) {
                 if(values.value == ''){
@@ -106,12 +141,14 @@
                     values.style.setProperty('border-bottom','solid #03e9fe', 'important');
                 }
             }
-            validate(name);
+            validate(fname);
+            validate(lname);
             validate(email);
             validate(phone);
             validate(password);
             validate(re_password);
             validate(address);
+            validate(username);
             if(password.value != re_password.value){
                 password.style.setProperty('border-bottom', '2px solid red', 'important');
                 re_password.style.setProperty('border-bottom', '2px solid red', 'important');

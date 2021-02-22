@@ -228,7 +228,7 @@ class ProductController extends Controller
         $favourite = Favourite::where('product_id',$id)->where('user_id',$user_id)->first();
         $fav_count = Favourite::where('product_id',$id)->count();
         // return response()->json($fav_count);
-        $review = Rating::where('product_id',$id)->orderBy('id', 'desc')->with('user')->get();
+        $review = Rating::where('product_id',$id)->orderBy('id', 'desc')->skip(0)->take(15)->with('user')->get();
         $rating = Rating::where('product_id',$id)->groupBy('user_id')->get()->avg('rate');
         $rating_count = Rating::where('product_id',$id)->groupBy('user_id')->count();
         // echo time_elapsed_string('2013-05-01 00:22:35');

@@ -1,22 +1,9 @@
 @extends('frontend/master')
 
 @section('content')
-    <div class="full-body">
-        <div class="container ">
-            {{-- <div class="error" style="width:30%; margin:0 auto">
-                @if(session('msg'))
-                <div class="alert alert-danger">{{ session('msg') }}</div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            </div> --}}
+    <div class="">
+        {{-- <div class="container ">
+
             <div class="row">
                 <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                     <div id="login" class="login-before">
@@ -41,72 +28,62 @@
                     </div>
                 </div>
             </div>
-
-
+        </div> --}}
+    <img class="wave" src="{{ asset('public/icon/wave.png') }}">
+	<div class="containers">
+		<div class="img">
+			<img src="{{ asset('public/icon/bg.svg') }}">
+		</div>
+		<div class="login-content">
+			<form action="{{ URL::to('/user/login') }}" method="post">
+                @csrf
+				<img src="{{ asset('public/icon/avatar.svg') }}">
+				<h2 class="title">Welcome</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-envelope"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>Email or Username</h5>
+                        <input type="text" class="input"  name="email" autocomplete="off">
+           		   		{{-- <input type="text" class="input"> --}}
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i">
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Password</h5>
+                        <input type="password" class="input"  name="password" >
+           		    	{{-- <input type="password" class="input"> --}}
+            	   </div>
+            	</div>
+            	<input type="submit" class="btn" value="Login">
+                <a class="text-primary" href="{{ URL::to('/user/registration') }}">I have no account.</a>
+            </form>
         </div>
+    </div>
     </div>
 
     <script>
-        let login = document.getElementById('login');
-        let register = document.getElementById('register');
-        let no_account = document.querySelector('.no-account');
-        let have_account = document.querySelector('.have-account');
-        // let name = document.getElementById('name');
-        // name.style.backgroundColor = "red !important";
-        no_account.addEventListener('click',function(){
-            login.classList.add('login');
-            register.classList.add('register');
+        const inputs = document.querySelectorAll(".input");
+        function addcl(){
+            let parent = this.parentNode.parentNode;
+            parent.classList.add("focus");
+        }
 
-            register.classList.add('register-before');
-            login.classList.add('login-before');
-
-            login.classList.remove('alogin');
-            register.classList.remove('aregister');
+        function remcl(){
+            let parent = this.parentNode.parentNode;
+            if(this.value == ""){
+                parent.classList.remove("focus");
+            }
+        }
 
 
-        })
-        // have_account.addEventListener('click',function(){
-        //     login.classList.remove('login');
-        //     register.classList.remove('register');
-        //     register.classList.remove('register-before');
-        //     register.classList.remove('login-before');
-
-        //     login.classList.add('alogin');
-        //     register.classList.add('aregister');
-
-        // })
-        // setTimeout(() => {
-        //     document.querySelector('.error').innerHTML = '';
-        // }, 2000);
-        // let reg = document.getElementById('reg');
-        // reg.addEventListener('submit',function(e){
-        //     let name = document.getElementById('name');
-        //     let email = document.querySelector('#register input[name="email"]');
-        //     let phone = document.querySelector('#register input[name="phone"]');
-        //     let password = document.querySelector('#register input[name="password"]');
-        //     let re_password = document.querySelector('#register input[name="re_password"]');
-        //     let address = document.querySelector('#register textarea[name="address"]');
-
-        //     function validate(values) {
-        //         if(values.value == ''){
-        //             values.style.setProperty('border-bottom', '2px solid red', 'important');
-        //             e.preventDefault();
-        //         }else{
-        //             values.style.setProperty('border-bottom','solid #03e9fe', 'important');
-        //         }
-        //     }
-        //     validate(name);
-        //     validate(email);
-        //     validate(phone);
-        //     validate(password);
-        //     validate(re_password);
-        //     validate(address);
-        //     if(password.value != re_password.value){
-        //         password.style.setProperty('border-bottom', '2px solid red', 'important');
-        //         re_password.style.setProperty('border-bottom', '2px solid red', 'important');
-        //         e.preventDefault();
-        //     }
-
-        // })
+        inputs.forEach(input => {
+            input.addEventListener("focus", addcl);
+            input.addEventListener("blur", remcl);
+        });
     </script>
 @endsection

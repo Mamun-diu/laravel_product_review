@@ -9,6 +9,8 @@ use App\Models\Favourite;
 use DB;
 use Hash;
 use Session;
+use Image;
+use DateTime;
 
 class UserController extends Controller
 {
@@ -35,13 +37,13 @@ class UserController extends Controller
         ]);
 
         if($validate){
-            $user = User::where('email',$request->email)->first();
+            $user = User::where('email',$request->email)->orWhere('username',$request->email)->first();
             if($user && Hash::check($request->password, $user->password)){
                 $request->session()->put('user',$user);
                 $request->session()->forget('admin');
                 return redirect('/');
             }else{
-                $request->session()->flash('msg', "Email or password is not matched");
+                $request->session()->flash('error', "Email or password is not matched");
                 return Redirect()->back();
             }
         }
@@ -67,7 +69,7 @@ class UserController extends Controller
                 $rating->save();
                 return Redirect()->back();
             }else{
-                $request->session()->flash('msg', "Email or password is not matched");
+                $request->session()->flash('error', "Email or password is not matched");
                 return Redirect()->back();
             }
 
@@ -93,7 +95,7 @@ class UserController extends Controller
                 $favourite->save();
                 return Redirect()->back();
             }else{
-                $request->session()->flash('msg', "Email or password is not matched");
+                $request->session()->flash('error', "Email or password is not matched");
                 return Redirect()->back();
             }
 
@@ -104,23 +106,35 @@ class UserController extends Controller
         return redirect('/');
     }
     public function registration(Request $request){
+        // return response()->json($request->input());
         $validate = $request->validate([
-            'name' => ['required'],
+            'fname' => ['required','max:10'],
+            'lname' => ['required','max:10'],
+            'username'=>['required', 'unique:users'],
             'email' => ['required', 'unique:users', 'max:255'],
             'password' => ['required'],
+            're_password' => 'required|same:password',
             'phone' => ['required' , 'unique:users'],
-            'address' => ['required'],
+            'address' => ['required' ],
         ]);
-        if($validate){
-            $user = new User;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->phone = $request->phone;
-            $user->address = $request->address;
-            $user->save();
-            return redirect('/login');
+        $user = new User;
+        $user->fname = $request->fname;
+        $user->lname = $request->lname;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->phone = $request->phone;
+        $user->gender = $request->gender;
+        $user->username = $request->username;
+        $user->address = $request->address;
+        $user->save();
+
+        $users = User::where('email',$request->email)->first();
+        if($users && Hash::check($request->password, $users->password)){
+            $request->session()->put('user',$user);
+            $request->session()->forget('admin');
+            return redirect('/');
         }
+
     }
 
     /**
@@ -175,21 +189,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validate = $request->validate([
-            'name' => ['required'],
-            'email' => 'required|unique:users,email,'.$id,
-            'phone' => 'required|unique:users,phone,'.$id,
-            'address' => ['required'],
-        ]);
-        if($validate){
-            $user = User::find($id);
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->address = $request->address;
-            $user->save();
-            return Redirect()->back();
-        }
+        // $validate = $request->validate([
+        //     'name' => ['required'],
+        //     'email' => 'required|unique:users,email,'.$id,
+        //     'phone' => 'required|unique:users,phone,'.$id,
+        //     'address' => ['required'],
+        // ]);
+        // if($validate){
+        //     $user = User::find($id);
+        //     $user->name = $request->name;
+        //     $user->email = $request->email;
+        //     $user->phone = $request->phone;
+        //     $user->address = $request->address;
+        //     $user->save();
+        //     return Redirect()->back();
+        // }
     }
     public function update_password(Request $request, $id){
         $validate = $request->validate([
@@ -216,6 +230,98 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function update_fullname(Request $request, $id){
+        $validate = $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+        ]);
+        $user = User::find($id);
+        $user->fname = $request->fname;
+        $user->lname = $request->lname;
+        $user->save();
+        return Redirect()->back()->with('msg','Full name updated successfully');
+    }
+    public function update_username(Request $request, $id){
+        $validate = $request->validate([
+            'username' => 'required|min:4|unique:users,username,'.$id,
+        ]);
+        $user = User::find($id);
+        $user->username = $request->username;
+        $user->save();
+        return Redirect()->back()->with('msg','Username updated successfully');
+    }
+    public function update_email(Request $request, $id){
+        $validate = $request->validate([
+            'email' => 'required|min:4|unique:users,email,'.$id,
+        ]);
+        $user = User::find($id);
+        $user->email = $request->email;
+        $user->save();
+        return Redirect()->back()->with('msg','Email updated successfully');
+    }
+    public function update_phone(Request $request, $id){
+        $validate = $request->validate([
+            'phone' => 'required|min:10|max:11|unique:users,phone,'.$id,
+        ]);
+        $user = User::find($id);
+        $user->phone = $request->phone;
+        $user->save();
+        return Redirect()->back()->with('msg','Phone updated successfully');
+    }
+    public function update_gender(Request $request, $id){
+
+        $user = User::find($id);
+        $user->gender = $request->gender;
+        $user->save();
+        return Redirect()->back()->with('msg','Gender updated successfully');
+    }
+    public function update_address(Request $request, $id){
+        $validate = $request->validate([
+            'address' => 'required',
+        ]);
+        $user = User::find($id);
+        $user->address = $request->address;
+        $user->save();
+        return Redirect()->back()->with('msg','Address updated successfully');
+    }
+    public function update_Image(Request $request, $id){
+        $validate = $request->validate([
+            'file' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
+        ]);
+        $image = $request->file('file');
+        $imageName = time().'.'.$image->extension();
+        $image->move(public_path('user_image'),$imageName);
+
+        // $image_resize = Image::make($image->getRealPath());
+        // // return response()->json($imageName);
+        // $image_resize->resize(300,300);
+        // $image_resize->save(public_path('user_image/'.$imageName));
+
+        $user = User::find($id);
+        $user->image = $imageName;
+        $user->save();
+        if(!empty($request->old_image)){
+            unlink(public_path('user_image/'.$request->old_image));
+        }
+
+        return Redirect()->back()->with('msg','Image updated successfully');
+    }
+    public function remove_account(Request $request, $id){
+        $user = User::find($id);
+        if(Hash::check($request->password, $user->password)){
+            if(!empty($request->image)){
+                unlink(public_path('user_image/'.$request->image));
+            }
+            $request->session()->forget('user');
+            $data = User::find($id);
+            $data->delete();
+
+            return redirect('/');
+        }else{
+            return Redirect()->back()->with('error','Password not matched');
+        }
     }
 
 }

@@ -69,7 +69,7 @@ function time_elapsed_string($datetime, $full = false) {
                         <h3 class="rating-count">({{ $rating_count }})</h3>
                     </div>
                     <div class="d-flex justify-content-left mt-n2 align-items-center mb-2">
-                        <i class="fas fa-heart fa-2x me-2 mt-n1 text-primary"></i><h2 class=""> ({{ $fav_count }})</h2>
+                        <i class="fas fa-heart fa-2x me-2 mt-n1 text-primary"></i><h2 class=""> (<span>{{ $fav_count }}</span>)</h2>
                     </div>
                     <div class="favourite">
                         @if(Session::has('user'))
@@ -159,6 +159,14 @@ function time_elapsed_string($datetime, $full = false) {
                 </div>
             </div>
             <div class="row my-5">
+                <div class="col-lg-6">
+                    <h2 class="text-center bg-secondary text-light p-2">Product Specification</h2>
+                    <div style="overflow: scroll">
+                        <div style="width : 1200px">
+                            <?php echo $product->details;?>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-6" style="background : #eee">
                     <h2 class="text-center bg-secondary text-light p-2">See All Review</h2>
                     @if($review != '[]')
@@ -166,7 +174,7 @@ function time_elapsed_string($datetime, $full = false) {
                         @foreach($review as $data)
                         <div class="all-review bg-white rounded m-2 p-2">
                             <div class="border-bottom mb-2">
-                                <h4 class="d-inline-block me-3">{{ $data->user->name }}</h4>
+                                <h4 class="d-inline-block me-3">{{ $data->user->fname }} {{ $data->user->lname }}</h4>
                                 <span class="text-danger">{{ time_elapsed_string($data->created_at) }}</span>
                             </div>
 
@@ -181,14 +189,7 @@ function time_elapsed_string($datetime, $full = false) {
                     @endif
 
                 </div>
-                <div class="col-lg-6">
-                    <h2 class="text-center bg-secondary text-light p-2">Product Specification</h2>
-                    <div style="overflow: scroll">
-                        <div style="width : 1200px">
-                            <?php echo $product->details;?>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
    </div>
@@ -377,6 +378,8 @@ function time_elapsed_string($datetime, $full = false) {
                     success: function(data){
                         $('.favourite').empty();
                         $('.favourite').append('<button class="remove-from-favourite-btn btn btn-danger  d-flex justify-content-center align-items-center"><i class="fas fa-heart me-3"></i>Remove from favourite</button>');
+                        var fav = $('div.d-flex.justify-content-left.mt-n2.align-items-center.mb-2 > h2 span').text();
+                        $('div.d-flex.justify-content-left.mt-n2.align-items-center.mb-2 > h2 span').text(parseInt(fav)+1);
 
                         // $("input[name='sub_category']").val('');
                         // $("body").append('<div class="toastr alert alert-success">Sub Category Added</div>');
@@ -410,7 +413,8 @@ function time_elapsed_string($datetime, $full = false) {
                     success: function(data){
                         $('.favourite').empty();
                         $('.favourite').append('<button class="add-to-favourite-btn btn btn-primary  d-flex justify-content-center align-items-center"><i class="fas fa-heart me-3"></i>Add to favourite</button>');
-
+                        var fav = $('div.d-flex.justify-content-left.mt-n2.align-items-center.mb-2 > h2 span').text();
+                        $('div.d-flex.justify-content-left.mt-n2.align-items-center.mb-2 > h2 span').text(parseInt(fav)-1);
                         // $("input[name='sub_category']").val('');
                         // $("body").append('<div class="toastr alert alert-success">Sub Category Added</div>');
                         // setTimeout(() => {
