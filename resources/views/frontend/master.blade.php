@@ -28,6 +28,11 @@
     </style>
   </head>
   <body>
+    <div id="ajax-loading-main" class="">
+        <div class="d-flex justify-content-center">
+            <img style="margin-top: 30vh" src="{{ asset('/public/icon/loading.png') }}" alt="">
+        </div>
+    </div>
     {{ view('frontend/header') }}
     <?php
         $msg = Session::get('msg');

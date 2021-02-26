@@ -43,7 +43,7 @@ class PriceController extends Controller
      */
     public function store(Request $request)
     {
-
+        // return response()->json('good');
             $validate = $request->validate([
                 'web_name' => 'required',
                 'price' => 'required|numeric',
@@ -58,9 +58,11 @@ class PriceController extends Controller
             $data = Price::where('product_id', '=', $request->product_id, 'and')->where('website_name', '=', $request->web_name)->get();
             if($data == '[]'){
                 $price->save();
-                return Redirect()->back()->with('msg','Price added successfully');
+                // return Redirect()->back()->with('msg','Price added successfully');
+                return response()->json('price added');
             }else{
-                return Redirect()->back()->with('error','This price is already on this website');
+                // return Redirect()->back()->with('error','This price is already on this website');
+                return response()->json('price exists');
             }
 
     }

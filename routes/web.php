@@ -40,15 +40,43 @@ Route::post('/user/registration', [UserController::class, 'registration']);
 Route::get('/user/registration',[UserController::class, 'show']);
 
 Route::get('/', [MainCategoryController::class, 'getMain']);
+Route::get('/pagination/fetch_data',[MainCategoryController::class, 'fetch_data']);
+Route::get('/pagination/fetch_product',[ProductController::class, 'fetch_product']);
+
+
 Route::get('/product/info/{id}', [ProductController::class, 'productInfo']);
 Route::get('/get/sub/category/{id}', [SubCategoryController::class, 'findSub']);
 
 Route::get('/get/tiny/category/{id}', [TinyCategoryController::class, 'findTiny']);
 
+
 Route::get('/product/filter/{id}',[MainCategoryController::class, 'getAll']);
 Route::get('/product/search/{id}', [ProductController::class, 'searchTop']);
 Route::get('/search/result', [ProductController::class, 'searchResult']);
 
+
+Route::get('/get/sub/filter/', [ProductController::class, 'getSubProduct']);
+Route::get('get/sub/brand/filter/', [ProductController::class, 'getSubBrand']);
+Route::get('get/tiny/brand/filter/', [ProductController::class, 'getTinyBrand']);
+
+Route::get('/get/tiny/filter/category', [ProductController::class, 'getTinyCategory']);
+Route::get('/get/sub-tiny/filter', [ProductController::class, 'getSubTinyProduct']);
+Route::get('/get/sub-tiny-brand/filter', [ProductController::class, 'getSubTinyBrandPagination']);
+Route::get('/get/brand/product', [ProductController::class, 'getBrandProduct']);
+Route::get('/get/sub-tiny/brand/product', [ProductController::class, 'getSubTinyBrandProduct']);
+
+
+Route::get('/get/sub/price/filter', [ProductController::class, 'getSubPrice']);
+Route::get('/get/sub-tiny/price/filter', [ProductController::class, 'getSubTinyPrice']);
+Route::get('get/sub-brand/price/filter/', [ProductController::class, 'getSubBrandPrice']);
+Route::get('get/sub-tiny-brand/price/filter/', [ProductController::class, 'getSubTinyBrandPrice']);
+
+
+Route::get('/get/price/sub/tiny/brand/filter',[ProductController::class, 'getPriceSubTinyBrandFilter']);
+Route::get('/get/price/sub/tiny/filter',[ProductController::class, 'getPriceSubTinyFilter']);
+Route::get('/get/price/sub/brand/filter',[ProductController::class, 'getPriceSubBrandFilter']);
+Route::get('/get/price/sub/filter',[ProductController::class, 'getPriceSubFilter']);
+Route::get('/get/price/filter',[ProductController::class, 'getPriceFilter']);
 
 
 Route::group(['middleware' => ['admin']], function () {

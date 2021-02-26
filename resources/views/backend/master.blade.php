@@ -20,8 +20,8 @@
         .toastr{
             position : absolute;
             top : 60px;
-            right : 10px;
-            z-index: 1000;
+            right : 20px;
+            z-index: 10000;
         }
     </style>
   </head>

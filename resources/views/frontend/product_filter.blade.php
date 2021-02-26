@@ -40,7 +40,7 @@
                                         <li style="border-bottom:2px solid #59811b; font-weight:bold" class="list-group-item" data-bs-toggle="collapse" href="#brand" role="button" aria-expanded="false" aria-controls="brand">Brand</li>
                                         <ul class="list-group collapse" id="brand">
                                             <?php $brands = 'none';?>
-                                            @foreach($product as $value)
+                                            @foreach($brand as $value)
                                                 @if($value->brand != $brands)
                                                     <?php $brands = $value->brand;?>
                                                     <li style="cursor: pointer" class="list-group-item brand itembox tinybox {{ substr($value->tiny->tiny_category,0,3) }} {{ substr($value->sub->sub_category,0,3) }}" data-filter="{{ $value->brand }}">{{ $value->brand }}</li>
@@ -59,18 +59,7 @@
                                             <div style="height  : 70px;padding-top : 5px;" class="multi-range-slider">
                                                  <input type="range" id="input-left" min="{{ $minNumber }}" max="{{ $maxNumber }}" value="{{ $minNumber }}">
                                                 <input type="range" id="input-right" min="{{ $minNumber }}" max="{{ $maxNumber }}" value="{{ $maxNumber }}">
-                                               {{-- <div class="slider">
-                                                    <div class="track"></div>
-                                                    <div class="range"></div>
-                                                    <div class="thumb left">
-                                                        <div class="show-left-filter-price">{{ $minNumber }}</div>
-                                                        <div class="show-left-filter-price-connection"></div>
-                                                    </div>
-                                                    <div class="thumb right">
-                                                        <div class="show-right-filter-price">{{ $maxNumber }}</div>
-                                                        <div class="show-right-filter-price-connection"></div>
-                                                    </div>
-                                                </div> --}}
+
                                                 <p class="d-flex justify-content-start align-items-center">
                                                     <label class="" for="amount">Price: </label>
                                                     <input  type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold; width : 200px">
@@ -88,7 +77,7 @@
                     <div class="col-12 col-lg-8 col-xl-9">
                         <div class="product-body-inner p-2 d-flex flex-wrap justify-content-center">
                             @foreach($product as $item)
-                            <a href="{{  URL::to('/product/info') }}/{{ $item->id }} " class="product itembox brandbox {{ substr($item->tiny->tiny_category,0,3) }} tinybox {{ substr($item->sub->sub_category,0,3) }} text-decoration-none {{ $item->brand }}">
+                            <a href="{{  URL::to('/product/info') }}/{{ $item->id }} " class="product itembox {{ substr($item->sub->sub_category,0,3) }} brandbox {{ substr($item->tiny->tiny_category,0,3) }} tinybox  text-decoration-none {{ $item->brand }}">
                                 <div class="card product-index m-1 shadow" style="">
                                     <img height="250px" src="{{ asset('public/images/') }}/{{ $item->image }}" class="card-img-top" alt="image">
                                     <div class="card-body">
@@ -163,25 +152,7 @@
                 })
             }
             filters();
-            //price filter
-            // $('#input-left,#input-right').on('input',function(){
-            //     let min = $('#input-left').val();
-            //     let max = $('#input-right').val();
-            //     $('.show-left-filter-price').text($('#input-left').val());
-            //     $('.show-right-filter-price').text($('#input-right').val());
-
-            //     $('.product-price').each(function(){
-            //         let p = $(this).closest('.itembox');
-            //         let price = $(this).text();
-            //         if(price >min && price <max){
-            //             p.show(1000);
-            //         }else{
-            //             p.hide(1000);
-            //         }
-
-            //     })
-
-            // })
+            
             //  website filter
             $('.list').click(function(){
                 const value = $(this).attr('data-filter');

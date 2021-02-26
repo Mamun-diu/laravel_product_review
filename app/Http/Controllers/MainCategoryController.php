@@ -126,27 +126,50 @@ class MainCategoryController extends Controller
         // return response()->json($fav);
         return view('frontend.index',compact('cat','product','top_rated','fav'));
     }
+
+    function fetch_data(Request $request){
+        // return response()->json("thik ase");
+        if($request->ajax()){
+            $product = Product::orderByRaw('id DESC')->with('price')->paginate(12);
+            return view('frontend.new-item')->with('product',$product);
+        }
+    }
+
+
     public function getAll($id){
         $subcat = Sub_category::where('main_category_id',$id)->get();
         $tinycat = Tiny_category::where('main_category_id',$id)->with('subCategory')->get();
-        $product = Product::where('main_category_id',$id)->orderByRaw('id DESC')->with('price')->with('sub')->with('tiny')->paginate(30);
+        $product = Product::where('main_category_id',$id)->orderByRaw('id DESC')->with('price')->with('sub')->with('tiny')->paginate(20);
+        $brand = Product::groupBy('brand')->get();
+        // return response()->json($brand);
         $min = Product::where('main_category_id',$id)->with('price')->get();
         // $brand = Product::distinct()->where('main_category_id',$id)->with('sub')->with('tiny')->get();
-        $minNumber = 100000000000;
-        $maxNumber = 0;
+        // $minimum = min(array($min->price->price));
+        // return response()->json($min[0]->price->price);
+        $taka = [];
         foreach ($min as  $key => $value) {
-            if($minNumber > $value->price->price){
-                $minNumber = $value->price->price;
-            }
-            if($maxNumber < $value->price->price){
-                $maxNumber = $value->price->price;
-            }
-
-            // $data[$key] = $value->price->price;
+            array_push($taka,$value->price->price);
         }
-        // return response()->json($maxNumber);
-        return view('frontend.product_filter',compact('subcat','product','tinycat','minNumber','maxNumber'));
+        $minNumber = min($taka);
+        $maxNumber = max($taka);
+
+        // $products = Product::with(['price' => function ($query) {
+        //     $query->where('price', '>=',50000)->where('price','<=',250000);
+
+        // }])->where('main_category_id',$id)
+        // ->paginate(2);
+        // $newProduct = [];
+        // foreach ($products as $key => $value) {
+        //     if($value->price){
+        //         array_push($newProduct,$value);
+        //     }
+        // }
+        // return response()->json($products);
+        // return response()->json($newProduct);
+
+        return view('frontend.product_filter2',compact('subcat','product','tinycat','minNumber','maxNumber','brand'));
     }
+
 
     public static function mainCategory(){
         $cat = Main_category::all();

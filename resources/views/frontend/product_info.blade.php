@@ -33,7 +33,7 @@ function time_elapsed_string($datetime, $full = false) {
 ?>
    <div class="p-info">
         <div class="border-bottom">
-            <div class="container">
+            {{-- <div class="container">
                 <nav aria-label="breadcrumb ">
                     <ol class="breadcrumb m-0 mt-2 p-1">
                       <li class="breadcrumb-item"><a href="{{ URL::to('/') }}">Home</a></li>
@@ -41,7 +41,7 @@ function time_elapsed_string($datetime, $full = false) {
                       <li class="breadcrumb-item active" aria-current="page">Notebook</li>
                     </ol>
                 </nav>
-            </div>
+            </div> --}}
         </div>
         <div class="container my-2">
             <div class="row">

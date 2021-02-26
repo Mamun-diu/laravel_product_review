@@ -46,7 +46,7 @@
 {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
     Launch static backdrop modal
   </button> --}}
-  
+
   {{-- Delete Product --}}
   <div class="modal fade" id="product-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -108,6 +108,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="staticBackdropLabel">Price</h5>
+          <button class="btn btn-primary mx-auto" data-bs-toggle="modal" data-bs-target="#add-price" data-bs-dismiss="modal">Add Price</button>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -131,6 +132,42 @@
       </div>
     </div>
   </div>
+
+    <!-- Add Price -->
+    <div class="modal fade" id="add-price" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel" >Add Price</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form id="form" action="" method="POST">
+                @csrf
+
+                <h3 class="text-center border-bottom pb-1">Add Price</h3>
+                <input class="add-product-id" type="hidden" name="product_id">
+                <div class="form-group">
+                    <input type="text" class="form-control mb-2" name="web_name" placeholder="Enter Website Name">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control mb-2" name="price" placeholder="Enter Product Price">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control mb-2" name="web_link" placeholder="Enter Website Link">
+                </div>
+                <button type="submit" class="btn btn-outline-primary w-100">Submit</button>
+
+            </form>
+
+            </div>
+            {{-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Understood</button>
+            </div> --}}
+          </div>
+        </div>
+      </div>
 
   <!-- Show Product -->
   <div class="modal fade" id="show-product" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -188,6 +225,44 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
                 }
             })
+
+            $('#form').submit(function(e){
+                e.preventDefault();
+                
+                var id = $('input[name="product_id"]')
+                var name = $('input[name="web_name"]')
+                var price = $('input[name="price"]')
+                var link = $('input[name="web_link"]')
+                if(name.val()!= '' && price.val()!= '' && link.val() != ''){
+                    $(this).closest('.modal-content').css({'border':'3px solid green'});
+                    $.ajax({
+                        type: "POST",
+                        url: '{{ URL::to("/admin/store/price") }}',
+                        data:{
+                            product_id : id.val(),
+                            web_name : name.val(),
+                            price : price.val(),
+                            web_link : link.val()
+                        },
+                        success: function(data){
+                            name.val('');
+                            price.val('');
+                            link.val('');
+                            $("body").append('<div class="toastr alert alert-success">Price Added Successfully</div>');
+                            $('.toastr').show();
+                            setTimeout(() => {
+                                $('.toastr').hide();
+                            }, 2000);
+
+                        }
+                    })
+
+                }else{
+                    $(this).closest('.modal-content').css({'border':'3px solid red'});
+                }
+            })
+
+
             $(document).on('click','.category',function(){
                 $('.cat_table').html('');
                 var id = $(this).data('id');
@@ -207,6 +282,7 @@
             $(document).on('click','.price',function(){
                 $('.price_table').html('');
                 let id = $(this).data('id');
+                $('.add-product-id').val(id);
                     $.ajax({
                         type: 'GET',
                         url: '{{URL::to("/admin/find/price/")}}/'+id,

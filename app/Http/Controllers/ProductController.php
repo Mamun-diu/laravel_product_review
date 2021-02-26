@@ -269,4 +269,246 @@ class ProductController extends Controller
         return Redirect()->back()->with('msg','Product Deleted Successfully');
     }
 
+
+
+    public function getSubProduct(Request $request){
+        if($request->ajax()){
+            $product = Product::where('sub_category_id',$request->s_id)->with('price')->paginate(20);
+            return view('frontend.filter_product')->with('product',$product);
+        }
+
+    }
+    public function getSubBrand(Request $request){
+        $brand = Product::where('sub_category_id',$request->s_id)->groupBy('brand')->get();
+        return response()->json($brand);
+    }
+    public function getTinyBrand(Request $request){
+        $brand = Product::where('sub_category_id',$request->s_id)->where('tiny_category_id',$request->t_id)->groupBy('brand')->get();
+        return response()->json($brand);
+    }
+    public function getTinyCategory(Request $request){
+        $tiny = Tiny_category::where('sub_category_id',$request->s_id)->get();
+        return response()->json($tiny);
+    }
+
+    public function getSubTinyProduct(Request $request){
+        if($request->ajax()){
+            $product = Product::where('sub_category_id',$request->s_id)->where('tiny_category_id',$request->t_id)->with('price')->paginate(20);
+
+            return view('frontend.filter_product')->with('product',$product);
+        }
+    }
+    public function getSubTinyBrandPagination(Request $request){
+        if($request->ajax()){
+            $product = Product::where('sub_category_id',$request->s_id)
+            ->where('tiny_category_id',$request->t_id)
+            ->where('brand',$request->brand)
+            ->with('price')->paginate(20);
+
+            return view('frontend.filter_product')->with('product',$product);
+        }
+    }
+    public function getBrandProduct(Request $request){
+        if($request->ajax()){
+            $product = Product::where('sub_category_id',$request->s_id)->where('brand',$request->brand)->with('price')->paginate(20);
+
+            return view('frontend.filter_product')->with('product',$product);
+        }
+    }
+    public function getSubTinyBrandProduct(Request $request){
+        if($request->ajax()){
+            $product = Product::where('sub_category_id',$request->s_id)->where('tiny_category_id',$request->t_id)->where('brand',$request->brand)->with('price')->paginate(20);
+
+            return view('frontend.filter_product')->with('product',$product);
+        }
+    }
+
+
+
+    public function getSubPrice(Request $request){
+        $min = Product::where('sub_category_id',$request->s_id)->with('price')->get();
+        $taka = [];
+        foreach ($min as  $key => $value) {
+            array_push($taka,$value->price->price);
+        }
+
+
+        if(count($min)!=0){
+            $minNumber = min($taka);
+            $maxNumber = max($taka);
+        }else{
+            $minNumber = 0;
+            $maxNumber = 0;
+        }
+        $data=[$minNumber,$maxNumber];
+        return response()->json($data);
+
+    }
+    public function getSubTinyPrice(Request $request){
+        $min = Product::where('sub_category_id',$request->s_id)
+        ->where('tiny_category_id',$request->t_id)
+        ->with('price')->get();
+        $taka = [];
+        foreach ($min as  $key => $value) {
+            array_push($taka,$value->price->price);
+        }
+
+
+        if(count($min)!=0){
+            $minNumber = min($taka);
+            $maxNumber = max($taka);
+        }else{
+            $minNumber = 0;
+            $maxNumber = 0;
+        }
+        $data=[$minNumber,$maxNumber];
+        return response()->json($data);
+
+    }
+    public function getSubBrandPrice(Request $request){
+        $min = Product::where('sub_category_id',$request->s_id)
+        ->where('brand',$request->brand)
+        ->with('price')->get();
+        $taka = [];
+        foreach ($min as  $key => $value) {
+            array_push($taka,$value->price->price);
+        }
+
+
+        if(count($min)!=0){
+            $minNumber = min($taka);
+            $maxNumber = max($taka);
+        }else{
+            $minNumber = 0;
+            $maxNumber = 0;
+        }
+        $data=[$minNumber,$maxNumber];
+        return response()->json($data);
+
+    }
+    public function getSubTinyBrandPrice(Request $request){
+        $min = Product::where('sub_category_id',$request->s_id)
+        ->where('tiny_category_id',$request->t_id)
+        ->where('brand',$request->brand)
+        ->with('price')->get();
+        $taka = [];
+        foreach ($min as  $key => $value) {
+            array_push($taka,$value->price->price);
+        }
+
+
+        if(count($min)!=0){
+            $minNumber = min($taka);
+            $maxNumber = max($taka);
+        }else{
+            $minNumber = 0;
+            $maxNumber = 0;
+        }
+        $data=[$minNumber,$maxNumber];
+        return response()->json($data);
+
+    }
+
+
+
+    public function fetch_product(Request $request){
+        if($request->ajax()){
+            $product = Product::orderByRaw('id DESC')->with('price')->paginate(20);
+            return view('frontend.filter_product')->with('product',$product);
+        }
+    }
+    public function getPriceSubTinyBrandFilter(Request $request){
+        if($request->ajax()){
+
+            $products = Product::with(['price' => function ($query) use ($request) {
+                $query->where('price', '>=',$request->min)->where('price','<=',$request->max);
+
+            }])->where('sub_category_id',$request->s_id)
+            ->where('tiny_category_id',$request->t_id)
+            ->where('brand',$request->brand)
+            ->get();
+            $newProduct = [];
+            foreach ($products as $key => $value) {
+                if($value->price){
+                    array_push($newProduct,$value);
+                }
+            }
+            // return response()->json($newProduct);
+            return view('frontend.filter_product')->with('product',$newProduct);
+        }
+    }
+    public function getPriceSubTinyFilter(Request $request){
+        if($request->ajax()){
+
+            $products = Product::with(['price' => function ($query) use ($request) {
+                $query->where('price', '>=',$request->min)->where('price','<=',$request->max);
+
+            }])->where('sub_category_id',$request->s_id)
+            ->where('tiny_category_id',$request->t_id)
+            ->get();
+            $newProduct = [];
+            foreach ($products as $key => $value) {
+                if($value->price){
+                    array_push($newProduct,$value);
+                }
+            }
+            // return response()->json($newProduct);
+            return view('frontend.filter_product')->with('product',$newProduct);
+        }
+    }
+    public function getPriceSubBrandFilter(Request $request){
+        if($request->ajax()){
+
+            $products = Product::with(['price' => function ($query) use ($request) {
+                $query->where('price', '>=',$request->min)->where('price','<=',$request->max);
+
+            }])->where('sub_category_id',$request->s_id)
+            ->where('brand',$request->brand)
+            ->get();
+            $newProduct = [];
+            foreach ($products as $key => $value) {
+                if($value->price){
+                    array_push($newProduct,$value);
+                }
+            }
+            // return response()->json($newProduct);
+            return view('frontend.filter_product')->with('product',$newProduct);
+        }
+    }
+    public function getPriceSubFilter(Request $request){
+        if($request->ajax()){
+
+            $products = Product::with(['price' => function ($query) use ($request) {
+                $query->where('price', '>=',$request->min)->where('price','<=',$request->max);
+
+            }])->where('sub_category_id',$request->s_id)
+            ->get();
+            $newProduct = [];
+            foreach ($products as $key => $value) {
+                if($value->price){
+                    array_push($newProduct,$value);
+                }
+            }
+            // return response()->json($newProduct);
+            return view('frontend.filter_product')->with('product',$newProduct);
+        }
+    }
+    public function getPriceFilter(Request $request){
+        if($request->ajax()){
+
+            $products = Product::with(['price' => function ($query) use ($request) {
+                $query->where('price', '>=',$request->min)->where('price','<=',$request->max);
+
+            }])->get();
+            $newProduct = [];
+            foreach ($products as $key => $value) {
+                if($value->price){
+                    array_push($newProduct,$value);
+                }
+            }
+            // return response()->json($newProduct);
+            return view('frontend.filter_product')->with('product',$newProduct);
+        }
+    }
+
 }
