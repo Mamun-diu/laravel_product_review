@@ -146,12 +146,21 @@ class MainCategoryController extends Controller
         // $brand = Product::distinct()->where('main_category_id',$id)->with('sub')->with('tiny')->get();
         // $minimum = min(array($min->price->price));
         // return response()->json($min[0]->price->price);
-        $taka = [];
-        foreach ($min as  $key => $value) {
-            array_push($taka,$value->price->price);
-        }
-        $minNumber = min($taka);
-        $maxNumber = max($taka);
+        
+            $taka = [];
+            foreach ($min as  $key => $value) {
+                array_push($taka,$value->price->price);
+            }
+            if($taka){
+                $minNumber = min($taka);
+                $maxNumber = max($taka);
+            }else{
+                $minNumber=0;
+                $maxNumber=0;
+            }
+            
+        
+
 
         // $products = Product::with(['price' => function ($query) {
         //     $query->where('price', '>=',50000)->where('price','<=',250000);
