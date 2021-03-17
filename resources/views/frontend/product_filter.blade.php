@@ -1,7 +1,7 @@
 @extends('frontend/master')
 
 @section('content')
-
+    {{-- Product Filter --}}
    <div class="filter-page">
 
         <div style="background:#224230;">
@@ -152,7 +152,7 @@
                 })
             }
             filters();
-            
+
             //  website filter
             $('.list').click(function(){
                 const value = $(this).attr('data-filter');
