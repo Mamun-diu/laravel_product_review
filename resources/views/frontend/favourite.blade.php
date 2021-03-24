@@ -3,6 +3,7 @@
 @section('content')
 <div class="product-body-full p-3 ">
     <div class="container ">
+    {{-- Test Comment --}}
         <h2 class="display-4 text-center text-muted">Your Favourite Item</h2>
         <div class="product-body-inner p-2 d-flex flex-wrap justify-content-center">
             @if(!empty($product[0]->product_id))
